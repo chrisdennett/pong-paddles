@@ -4,8 +4,8 @@ export class Ball{
         this.bounds = bounds;
         this.x = 100;
         this.y = 200;
-        this.vx = 2;
-        this.vy = 3;
+        this.vx = 4;
+        this.vy = 7;
         this.height = 20;
         this.width = 20;
     }

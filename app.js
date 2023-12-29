@@ -16,10 +16,14 @@ const info = new Info(ball);
 loop();
 
 function loop(){
+    update();
+    
+    window.requestAnimationFrame(()=>loop())
+}
+
+function update(){
     ball.update();
     paddleLeft.update();
     paddleRight.update();
     info.update();
-    
-    window.requestAnimationFrame(()=>loop())
 }
