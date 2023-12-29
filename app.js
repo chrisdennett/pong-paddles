@@ -1,3 +1,4 @@
+import { Info } from './Info.js';
 import { Paddle } from './Paddle.js';
 import { Ball } from '/Ball.js'; 
 
@@ -7,15 +8,18 @@ const bounds = {
     bottom: 400,
     left: 0
 }
-const paddle1 = new Paddle(bounds);
 const ball = new Ball(bounds);
+const paddleLeft = new Paddle({bounds, ball, side:"left"});
+const paddleRight = new Paddle({bounds, ball, side:"right"});
+const info = new Info(ball);
 
 loop();
 
 function loop(){
-
     ball.update();
-    paddle1.update();
+    paddleLeft.update();
+    paddleRight.update();
+    info.update();
     
     window.requestAnimationFrame(()=>loop())
 }

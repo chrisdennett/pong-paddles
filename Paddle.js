@@ -1,18 +1,37 @@
 export class Paddle{
-    constructor(bounds){
-        this.div = document.getElementById("paddle1");
+    constructor({bounds, ball, side}){
+        this.side = side;
+        this.ball = ball;
+        this.div = document.getElementById(side === "left" ? "paddleLeft" : "paddleRight");
         this.width = 20;
         this.height = 100;
         this.bounds = bounds;
-        this.x = 0;
+        this.x = this.side === "left" ? 0 : this.bounds.right - this.width;
         this.y = 0;
 
-        this.center()
+        this.center();
         this.setStyles();
     }
 
     update(){
-        this.div.style.transform = `translate(0, ${this.x}px)`
+        this.followBall();
+        this.restrictToBounds();
+
+        this.div.style.transform = `translate(${this.x}px, ${this.y}px)`
+    }
+
+    followBall(){
+        this.y = this.ball.y - this.height / 2;
+    }
+
+    restrictToBounds(){
+        if(this.y < 0){
+            this.y = 0;
+        }
+        
+        if(this.y > this.bounds.bottom - this.height){
+            this.y = this.bounds.bottom - this.height;
+        }
     }
 
     setStyles(){
@@ -21,6 +40,6 @@ export class Paddle{
     }
 
     center(){
-        this.x = this.bounds.bottom / 2 - this.height/ 2;
+        this.y = this.bounds.bottom / 2 - this.height/ 2;
     }
 }

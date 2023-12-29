@@ -7,7 +7,7 @@ export class Ball{
         this.vx = 2;
         this.vy = 3;
         this.height = 20;
-        this.width = 20
+        this.width = 20;
     }
 
     update(){
