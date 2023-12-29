@@ -38,3 +38,15 @@ h1 {
   height: 20px;
   position: absolute;
 }
+
+.score{
+  position: absolute;
+}
+
+#player1Score{
+  left: 100px;
+}
+
+#player2Score{
+  right: 100px;
+}
