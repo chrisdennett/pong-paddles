@@ -1,17 +1,12 @@
 export class Ball{
-    constructor(){
+    constructor(bounds){
         this.div = document.getElementById("ball");
-        this.bounds = {
-            top: 0,
-            right: 400,
-            bottom: 400,
-            left: 0
-        }
+        this.bounds = bounds;
         this.x = 100;
         this.y = 200;
         this.vx = 2;
         this.vy = 3;
-        this.height = 20,
+        this.height = 20;
         this.width = 20
     }
 
@@ -20,7 +15,10 @@ export class Ball{
         this.x += this.vx;
         this.y += this.vy;
 
+        this.restictToBounds();
+    }
 
+    restictToBounds(){
         if(this.x >= this.bounds.right - this.width){
             this.x = this.bounds.right - this.width;
             this.vx = -this.vx;
