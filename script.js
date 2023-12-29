@@ -1,7 +1,10 @@
 
+const paddle1 = document.getElementById("paddle1");
+const ball = document.getElementById("ball");
+
 loop();
 
 function loop(){
-    console.log("2")
+    
     window.requestAnimationFrame(()=>loop())
 }
