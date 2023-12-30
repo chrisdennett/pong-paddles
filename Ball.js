@@ -1,6 +1,8 @@
 export class Ball{
-    constructor(bounds){
-        this.div = document.getElementById("ball");
+    constructor(bounds, parentElement){
+        this.div = document.createElement("div");
+        this.div.classList = ["ball"];
+        parentElement.appendChild(this.div);
         this.bounds = bounds;
         this.x = 100;
         this.y = 200;

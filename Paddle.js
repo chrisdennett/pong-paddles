@@ -1,8 +1,13 @@
 export class Paddle{
-    constructor({bounds, ball, side}){
+    constructor({bounds, ball, side, parentElement}){
         this.side = side;
         this.ball = ball;
-        this.div = document.getElementById(side === "left" ? "paddleLeft" : "paddleRight");
+        this.div = document.createElement('div');
+        this.div.classList.add("paddle");
+        this.div.classList.add(side === "left" ? "paddleLeft" : "paddleRight");
+        
+        parentElement.appendChild(this.div);
+        // this.div = document.getElementById(side === "left" ? "paddleLeft" : "paddleRight");
         this.width = 20;
         this.height = 100;
         this.bounds = bounds;

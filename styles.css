@@ -15,14 +15,14 @@ h1 {
 }
 
 
-#playArea{
+.playArea{
   position: relative;
-    text-align: center;
-    width: 400px;
-    height: 400px;
-    margin: auto;
-    border: 1px solid #000000;
-    padding: 0;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  border: 1px solid #000000;
+  padding: 0;
 }
 
 .paddle{
@@ -32,7 +32,7 @@ h1 {
   position: absolute;
 }
 
-#ball{
+.ball{
   background: black;
   width: 20px;
   height: 20px;
@@ -43,10 +43,10 @@ h1 {
   position: absolute;
 }
 
-#player1Score{
+.player1Score{
   left: 100px;
 }
 
-#player2Score{
+.player2Score{
   right: 100px;
 }
