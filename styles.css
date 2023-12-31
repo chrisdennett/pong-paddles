@@ -9,6 +9,15 @@ body {
   background-color: rgb(248, 238, 212);
 }
 
+#fpsCounter{
+  position:fixed;
+  background: black;
+  color: white;
+  padding: 5px;
+  right: 40px;
+  top: 10px;
+}
+
 h1 {
   font-weight: bold;
   font-size: 1.5rem;

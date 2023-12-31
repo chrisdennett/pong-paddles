@@ -1,6 +1,7 @@
 
 import { Pong } from './Pong.js';
 import { PongTestArea } from './PongTestArea.js';
+import { calculateFPS } from './fps.js';
 
 const parentElement = document.getElementById("main");
 
@@ -19,6 +20,9 @@ loop();
 function loop(){
     pong.update();
     testArea.update();
+
+    // Calculate and display FPS
+    calculateFPS();
     
     window.requestAnimationFrame(()=>loop())
 }
