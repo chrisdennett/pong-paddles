@@ -10,7 +10,7 @@ export class Paddle {
     parentElement.appendChild(this.div);
     // this.div = document.getElementById(side === "left" ? "paddleLeft" : "paddleRight");
     this.width = 20;
-    this.height = 70;
+    this.height = 20;
     this.bounds = bounds;
     this.x = this.side === "left" ? 0 : this.bounds.right - this.width;
     this.y = 0;
@@ -31,13 +31,13 @@ export class Paddle {
     const paddleIsAboveBall = this.y + this.height < this.ball.y;
     // const paddleInLineWithBall = !paddleIsBelowBall && !paddleIsAboveBall;
     const isLeftPaddle = this.side === "left";
-    const ballGoingLeft = this.ball.vx < 0;
+    const ballGoingLeft = this.ball.vx < Math.round(Math.random());
 
     // slow speed if not returning
     let isReturning =
       (isLeftPaddle && ballGoingLeft) || (!isLeftPaddle && !ballGoingLeft);
 
-    const moveSpeed = isReturning ? this.speed : this.speed / 2.8;
+    const moveSpeed = isReturning ? this.speed : 0;
 
     if (paddleIsBelowBall) {
       this.y -= moveSpeed;

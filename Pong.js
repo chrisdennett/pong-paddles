@@ -10,6 +10,7 @@ export class Pong {
     this.div.classList = ["playArea"];
     parentElement.appendChild(this.div);
     this.score = { p1: 0, p2: 0 };
+    this.lastScoreOneBy = null;
 
     this.addNet();
     this.addScores();
@@ -46,6 +47,21 @@ export class Pong {
     this.div.appendChild(this.player2Score);
   }
 
+  onPointScored(wonBy) {
+    this.lastScoreOneBy = wonBy;
+    this.ball.reset();
+
+    setTimeout(() => {
+      console.log("wonBy: ", wonBy);
+      this.ball.vy = Math.random() >= 0.5 ? 9 : -9;
+      if (this.lastScoreOneBy === "p1") {
+        this.ball.vx = 7;
+      } else {
+        this.ball.vx = -7;
+      }
+    }, 500);
+  }
+
   addNet() {
     this.net = document.createElement("div");
     this.net.classList = ["net"];
@@ -70,6 +86,7 @@ export class Pong {
     } else if (paddleLeftHit === "miss") {
       this.score.p2++;
       this.player2Score.innerHTML = this.score.p2;
+      this.onPointScored("p2");
     }
 
     if (paddleRightHit === "hit") {
@@ -79,6 +96,7 @@ export class Pong {
     } else if (paddleRightHit === "miss") {
       this.score.p1++;
       this.player1Score.innerHTML = this.score.p1;
+      this.onPointScored("p1");
     }
   }
 

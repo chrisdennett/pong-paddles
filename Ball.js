@@ -6,18 +6,35 @@ export class Ball {
     this.bounds = bounds;
     this.x = 100;
     this.y = 200;
-    this.vx = 5;
-    this.vy = 7;
+    this.vx = 7;
+    this.vy = 9;
     this.height = 20;
     this.width = 20;
   }
 
   update() {
-    this.div.style.transform = `translate(${this.x}px, ${this.y}px)`;
     this.x += this.vx;
     this.y += this.vy;
 
     this.restictToBounds();
+
+    this.draw();
+  }
+
+  draw() {
+    this.div.style.transform = `translate(${this.x}px, ${this.y}px)`;
+  }
+
+  center() {
+    this.x = this.bounds.right / 2 - this.width / 2;
+    this.y = this.bounds.bottom / 2 - this.height / 2;
+  }
+
+  reset() {
+    this.center();
+    this.vx = 0;
+    this.vy = 0;
+    this.draw();
   }
 
   restictToBounds() {
