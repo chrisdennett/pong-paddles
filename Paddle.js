@@ -37,7 +37,7 @@ export class Paddle {
     let isReturning =
       (isLeftPaddle && ballGoingLeft) || (!isLeftPaddle && !ballGoingLeft);
 
-    const moveSpeed = isReturning ? this.speed : this.speed / 4;
+    const moveSpeed = isReturning ? this.speed : this.speed / 2.8;
 
     if (paddleIsBelowBall) {
       this.y -= moveSpeed;

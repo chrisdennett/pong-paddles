@@ -60,8 +60,6 @@ export class Pong {
     this.paddleRight.update();
     this.info.update();
 
-    // travelling from right to left
-
     const paddleLeftHit = this.checkPaddleLeftHit();
     const paddleRightHit = this.checkPaddleRightHit();
 
@@ -70,6 +68,8 @@ export class Pong {
       // bounce ball
       this.ball.vx = -this.ball.vx;
     } else if (paddleLeftHit === "miss") {
+      this.score.p2++;
+      this.player2Score.innerHTML = this.score.p2;
     }
 
     if (paddleRightHit === "hit") {
@@ -77,13 +77,24 @@ export class Pong {
       // bounce ball
       this.ball.vx = -this.ball.vx;
     } else if (paddleRightHit === "miss") {
+      this.score.p1++;
+      this.player1Score.innerHTML = this.score.p1;
     }
   }
 
   checkPaddleLeftHit() {
     const travellingLeft = this.ball.vx < 0;
-    const isFarEnoughLeft = this.ball.x < this.paddleLeft.width;
+    const isFarEnoughLeft = this.ball.x <= this.paddleLeft.width;
     if (!travellingLeft || !isFarEnoughLeft) return null;
+
+    return this.paddleHit(this.paddleLeft);
+  }
+
+  checkPaddleRightHit() {
+    const travellingRight = this.ball.vx > 0;
+    const isFarEnoughRight =
+      this.ball.x + this.ball.width >= this.paddleRight.x;
+    if (!travellingRight || !isFarEnoughRight) return null;
 
     return this.paddleHit(this.paddleRight);
   }
@@ -97,14 +108,5 @@ export class Pong {
     } else {
       return "miss";
     }
-  }
-
-  checkPaddleRightHit() {
-    const travellingRight = this.ball.vx > 0;
-    const isFarEnoughRight =
-      this.ball.x >= this.paddleRight.x - this.paddleRight.width;
-    if (!travellingRight || !isFarEnoughRight) return null;
-
-    return this.paddleHit(this.paddleRight);
   }
 }
