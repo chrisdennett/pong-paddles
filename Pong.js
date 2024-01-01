@@ -5,10 +5,14 @@ import { Ball } from "/Ball.js";
 export class Pong {
   constructor(bounds, parentElement) {
     this.bounds = bounds;
+    this.middleX = this.bounds.right / 2;
     this.div = document.createElement("div");
     this.div.classList = ["playArea"];
     parentElement.appendChild(this.div);
+    this.score = { p1: 0, p2: 0 };
+
     this.addNet();
+    this.addScores();
     this.ball = new Ball(this.bounds, this.div);
     this.paddleLeft = new Paddle({
       parentElement: this.div,
@@ -25,11 +29,29 @@ export class Pong {
     this.info = new Info(this.ball);
   }
 
+  addScores() {
+    // p1
+    this.player1Score = document.createElement("div");
+    this.player1Score.innerHTML = this.score.p1;
+    this.player1Score.classList = ["score"];
+    this.player1Score.style.width = `${this.middleX}px`;
+    // this.player1Score.style.left = `${this.middleX}px`;
+    this.div.appendChild(this.player1Score);
+
+    // p2
+    this.player2Score = document.createElement("div");
+    this.player2Score.innerHTML = this.score.p2;
+    this.player2Score.classList = ["score"];
+    this.player2Score.style.width = `${this.middleX}px`;
+    this.player2Score.style.left = `${this.middleX}px`;
+    this.div.appendChild(this.player2Score);
+  }
+
   addNet() {
     this.net = document.createElement("div");
     this.net.classList = ["net"];
-    // this.net.style.width =  + "px";
-    this.net.style.left = this.bounds.right / 2 + "px";
+    this.net.style.width = `20px`;
+    this.net.style.left = `${this.middleX - 10}px`;
     this.div.appendChild(this.net);
   }
 
