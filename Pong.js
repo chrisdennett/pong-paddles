@@ -35,7 +35,6 @@ export class Pong {
     this.player1Score.innerHTML = this.score.p1;
     this.player1Score.classList = ["score"];
     this.player1Score.style.width = `${this.middleX}px`;
-    // this.player1Score.style.left = `${this.middleX}px`;
     this.div.appendChild(this.player1Score);
 
     // p2
@@ -70,18 +69,14 @@ export class Pong {
       // play noise
       // bounce ball
       this.ball.vx = -this.ball.vx;
-      console.log("paddleLeftHit: ", paddleLeftHit);
     } else if (paddleLeftHit === "miss") {
-      console.log("paddleLeftHit: ", paddleLeftHit);
     }
 
     if (paddleRightHit === "hit") {
       // play noise
       // bounce ball
       this.ball.vx = -this.ball.vx;
-      console.log("paddleRightHit: ", paddleRightHit);
     } else if (paddleRightHit === "miss") {
-      console.log("paddleRightHit: ", paddleRightHit);
     }
   }
 

@@ -10,3 +10,12 @@
 - have the simlated players winning and losing points.
 - add Scores
 - get the serve starting from the middle line and going slowler than usual until hit for the first time.
+
+## ideas
+
+- create a matrix version where everything is made from green text on black
+- have a rally tally
+- change paddle colour on hit
+- shake play area on hit
+- try moving middle barrier
+- change bat size if score - smaller if score point, larger if lose point
