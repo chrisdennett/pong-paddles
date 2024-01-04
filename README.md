@@ -5,7 +5,7 @@
 ## TODO
 
 - move all params to a central state object.
-- make it adjustable via bounds
+- stop the jerky motion
 - add sounds
 - Adjust simulation so paddles behave a bit more randomly / naturally
 - have the simulated paddles hit the ball with different parst of the paddle. This may happen naturally if they are slowed down.

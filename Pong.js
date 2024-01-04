@@ -8,6 +8,8 @@ export class Pong {
     this.middleX = this.bounds.right / 2;
     this.div = document.createElement("div");
     this.div.classList = ["playArea"];
+    this.div.style.width = `${this.bounds.right}px`;
+    this.div.style.height = `${this.bounds.bottom}px`;
     parentElement.appendChild(this.div);
     this.score = { p1: 0, p2: 0 };
     this.lastScoreOneBy = null;
@@ -16,16 +18,16 @@ export class Pong {
     this.addScores();
     this.ball = new Ball(this.div, params);
     this.paddleLeft = new Paddle({
-      parentElement: this.div,
-      bounds: this.bounds,
-      ball: this.ball,
       side: "left",
+      parentElement: this.div,
+      ball: this.ball,
+      params,
     });
     this.paddleRight = new Paddle({
-      parentElement: this.div,
-      bounds: this.bounds,
-      ball: this.ball,
       side: "right",
+      parentElement: this.div,
+      ball: this.ball,
+      params,
     });
     this.info = new Info(this.ball);
   }
