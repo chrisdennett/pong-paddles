@@ -7,19 +7,18 @@ const params = {
     vx: 7,
     vy: 9,
   },
+  bounds: {
+    top: 0,
+    right: 400,
+    bottom: 400,
+    left: 0,
+  },
 };
 
 const parentElement = document.getElementById("main");
 
-const bounds = {
-  top: 0,
-  right: 400,
-  bottom: 400,
-  left: 0,
-};
-
 // const testArea = new PongTestArea(bounds, parentElement);
-const pong = new Pong(bounds, parentElement);
+const pong = new Pong(params, parentElement);
 
 loop();
 

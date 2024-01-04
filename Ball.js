@@ -1,13 +1,14 @@
 export class Ball {
-  constructor(bounds, parentElement) {
+  constructor(parentElement, params) {
+    this.defaultParams = params.ball;
     this.div = document.createElement("div");
     this.div.classList = ["ball"];
     parentElement.appendChild(this.div);
-    this.bounds = bounds;
+    this.bounds = params.bounds;
     this.x = 100;
     this.y = 200;
-    this.vx = 7;
-    this.vy = 9;
+    this.vx = this.defaultParams.vx;
+    this.vy = this.defaultParams.vx;
     this.height = 20;
     this.width = 20;
   }
@@ -34,6 +35,12 @@ export class Ball {
     this.center();
     this.vx = 0;
     this.vy = 0;
+    this.draw();
+  }
+
+  serve(toPlayerOne) {
+    this.vx = toPlayerOne ? -this.defaultParams.vx : this.defaultParams.vx;
+    this.vy = Math.random() * this.defaultParams.vy;
     this.draw();
   }
 

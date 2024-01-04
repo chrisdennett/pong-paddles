@@ -3,8 +3,8 @@ import { Paddle } from "./Paddle.js";
 import { Ball } from "/Ball.js";
 
 export class Pong {
-  constructor(bounds, parentElement) {
-    this.bounds = bounds;
+  constructor(params, parentElement) {
+    this.bounds = params.bounds;
     this.middleX = this.bounds.right / 2;
     this.div = document.createElement("div");
     this.div.classList = ["playArea"];
@@ -14,16 +14,16 @@ export class Pong {
 
     this.addNet();
     this.addScores();
-    this.ball = new Ball(this.bounds, this.div);
+    this.ball = new Ball(this.div, params);
     this.paddleLeft = new Paddle({
       parentElement: this.div,
-      bounds,
+      bounds: this.bounds,
       ball: this.ball,
       side: "left",
     });
     this.paddleRight = new Paddle({
       parentElement: this.div,
-      bounds,
+      bounds: this.bounds,
       ball: this.ball,
       side: "right",
     });
@@ -54,11 +54,8 @@ export class Pong {
     setTimeout(() => {
       console.log("wonBy: ", wonBy);
       this.ball.vy = Math.random() >= 0.5 ? 9 : -9;
-      if (this.lastScoreOneBy === "p1") {
-        this.ball.vx = 7;
-      } else {
-        this.ball.vx = -7;
-      }
+      const serveToPlayerOne = this.lastScoreOneBy === "p2";
+      this.ball.serve(serveToPlayerOne);
     }, 500);
   }
 
