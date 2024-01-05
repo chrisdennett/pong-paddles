@@ -10,7 +10,159 @@
     <div id="fpsCounter"></div>
     <h1>PONG Test Ground</h1>
 
-    <main id="main"></main>
+    <main id="main">
+      <svg id="pongSvg" viewBox="0 0 278.7 219.5">
+        <defs id="defs1">
+          <radialGradient
+            xlink:href="#linearGradient5"
+            id="radialGradient6"
+            cx="152.9"
+            cy="119.3"
+            r="129.5"
+            fx="152.9"
+            fy="119.3"
+            gradientTransform="matrix(1.30642 -.01269 .00828 .85302 -42.1 53.9)"
+            gradientUnits="userSpaceOnUse"
+          />
+          <linearGradient id="linearGradient5">
+            <stop
+              id="stop5"
+              offset="0"
+              stop-color="#f9f9f9"
+              stop-opacity=".4"
+            />
+            <stop
+              id="stop7"
+              offset=".5"
+              stop-color="#fcfcfc"
+              stop-opacity=".3"
+            />
+            <stop id="stop6" offset="1" stop-color="#fff" stop-opacity=".1" />
+          </linearGradient>
+        </defs>
+        <g id="game">
+          <path
+            id="inlay"
+            fill="#000"
+            stroke="none"
+            d="M28.3 7.7C40.5 6 79 0 140.3 0c68.3 0 91.5 3.5 108.7 6.2 17.3 2.8 23 10.6 25.5 22.2 1.7 8 4.5 45.7 4.2 87.4-.3 40-1.2 66.2-3.7 77.8-2.6 11.6-10.6 17.5-28.8 20-18.3 2.5-47.5 5.9-110 5.9s-95-5.5-107.4-6.7c-12.3-1.2-21.7-8.3-24.3-20.3C1.8 180.5 0 157 0 119s2-77.2 3.8-88.5A29 29 0 0 1 28.3 7.7Z"
+          />
+          <path
+            id="screen"
+            fill="#3584fb"
+            stroke="none"
+            d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"
+          />
+          <path
+            id="screenShine"
+            fill="url(#radialGradient6)"
+            stroke="none"
+            d="M35.5 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"
+          />
+          <path
+            id="ball"
+            fill="#f9f9f9"
+            stroke="none"
+            d="M155.6 92.9h5.3v5.3h-5.3z"
+          />
+          <path
+            id="paddleLeft"
+            fill="#f9f9f9"
+            stroke="none"
+            d="M37 92.9h5.3v21.2H37z"
+          />
+          <path
+            id="paddleRight"
+            fill="#f9f9f9"
+            stroke="none"
+            d="M234.9 92.9h5.3v21.2h-5.3z"
+          />
+          <path
+            id="net"
+            fill="#f0f"
+            stroke="#fff"
+            stroke-dasharray="3.7 3.7"
+            stroke-dashoffset="0"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-width="5.3"
+            d="M138.7 30.7v161.8"
+          />
+          <path
+            id="leftBoundary"
+            fill="#f0f"
+            stroke="#fff"
+            stroke-dasharray="1.1"
+            stroke-dashoffset="0"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-width="5.3"
+            d="M34.3 25.3v168.2"
+          />
+          <path
+            id="rightBoundary"
+            fill="#f0f"
+            stroke="#fff"
+            stroke-dasharray="1.1"
+            stroke-dashoffset="0"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-width="5.3"
+            d="M242.6 25.6v169.2"
+          />
+          <path
+            id="topBoundary"
+            fill="#f0f"
+            stroke="#fff"
+            stroke-dasharray="5.3 4"
+            stroke-dashoffset="0"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-width="2.6"
+            d="M238.1 26.8H36.6"
+          />
+          <path
+            id="bottomBoundary"
+            fill="#f0f"
+            stroke="#fff"
+            stroke-dasharray="5.3 4"
+            stroke-dashoffset="0"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-width="2.6"
+            d="M238.1 193.5H36.6"
+          />
+          <text
+            id="scoreLeft"
+            x="87.5"
+            y="65.5"
+            fill="#f9f9f9"
+            stroke="none"
+            font-family="Poppins"
+            font-size="39.2"
+            font-weight="900"
+            letter-spacing="2.5"
+            text-anchor="middle"
+          >
+            <tspan x="88.7" y="65.5">6</tspan>
+          </text>
+          <text
+            id="scoreRight"
+            x="188.1"
+            y="65.5"
+            fill="#f9f9f9"
+            stroke="none"
+            font-family="Poppins"
+            font-size="39.2"
+            font-weight="900"
+            letter-spacing="2.5"
+            text-anchor="middle"
+          >
+            <tspan x="189.3" y="65.5">9</tspan>
+          </text>
+        </g>
+      </svg>
+    </main>
 
     <div id="info">
       <p>Ball Direction: <span id="ballDirection">-</span></p>

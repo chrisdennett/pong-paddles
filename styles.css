@@ -9,6 +9,10 @@ body {
   background-color: #3783fa;
 }
 
+#pongSvg {
+  width: 800px;
+}
+
 #fpsCounter {
   position: fixed;
   background: black;
