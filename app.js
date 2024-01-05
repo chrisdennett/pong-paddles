@@ -7,10 +7,13 @@ const svgParams = {
   ball: {
     vx: 20,
     vy: 50,
+    width: 5.3,
+    height: 5.3,
   },
   paddle: {
-    width: 20,
-    height: 60,
+    colour: "#f9f9f9",
+    width: 5.3,
+    height: 21.2,
     speed: 6,
   },
   bounds: {
@@ -20,9 +23,9 @@ const svgParams = {
     left: 0,
   },
   gameBounds: {
-    top: 28,
-    right: 235,
-    bottom: 187,
+    top: 28.2,
+    right: 240,
+    bottom: 192,
     left: 37,
   },
   winningScore: 11,

@@ -6,11 +6,35 @@ export class SVGPong {
   constructor(params) {
     this.bounds = params.bounds;
     this.middleX = this.bounds.right / 2;
-    this.svg = document.getElementById("svgPong");
-    const ballElem = document.getElementById("svgBall");
-
     this.gameBounds = params.gameBounds;
-    ballElem.style.transform = `translate(${this.gameBounds.right}px, ${this.gameBounds.top}px)`;
+    this.paddleParams = params.paddle;
+    this.ballParams = params.ball;
+
+    this.paddleParams.left = this.gameBounds.left;
+    this.paddleParams.top = this.gameBounds.top;
+    this.paddleParams.bottom =
+      this.gameBounds.bottom - this.paddleParams.height;
+    this.paddleParams.right = this.gameBounds.right - this.paddleParams.width;
+
+    this.ballParams.left = this.gameBounds.left;
+    this.ballParams.top = this.gameBounds.top;
+    this.ballParams.right = this.gameBounds.right - this.ballParams.width;
+    this.ballParams.bottom = this.gameBounds.bottom - this.ballParams.height;
+
+    this.svg = document.getElementById("svgPong");
+
+    const ballElem = document.getElementById("svgBall");
+    const paddleLeftElem = document.getElementById("paddleLeft");
+    const paddleRightElem = document.getElementById("paddleRight");
+
+    ballElem.style.transform = `translate(${this.ballParams.right}px, ${this.ballParams.top}px)`;
+    ballElem.style.fill = `#ff0000`;
+
+    paddleLeftElem.style.transform = `translate(${this.gameBounds.left}px, ${this.gameBounds.top}px)`;
+    paddleLeftElem.style.fill = `#ff0000`;
+
+    paddleRightElem.style.transform = `translate(${this.paddleParams.right}px, ${this.paddleParams.bottom}px)`;
+    paddleRightElem.style.fill = `#ff0000`;
 
     this.svg.style.width = `${this.bounds.right}px`;
     this.svg.style.height = `${this.bounds.bottom}px`;
