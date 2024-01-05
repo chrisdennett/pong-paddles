@@ -7,6 +7,11 @@ export class SVGPong {
     this.bounds = params.bounds;
     this.middleX = this.bounds.right / 2;
     this.svg = document.getElementById("svgPong");
+    const ballElem = document.getElementById("svgBall");
+
+    this.gameBounds = params.gameBounds;
+    ballElem.style.transform = `translate(${this.gameBounds.right}px, ${this.gameBounds.top}px)`;
+
     this.svg.style.width = `${this.bounds.right}px`;
     this.svg.style.height = `${this.bounds.bottom}px`;
     this.score = { p1: 0, p2: 0 };
@@ -96,4 +101,8 @@ export class SVGPong {
       return "miss";
     }
   }
+}
+
+class SVGBall {
+  constructor() {}
 }
