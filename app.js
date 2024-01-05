@@ -1,6 +1,16 @@
 import { Pong } from "./Pong.js";
+import { SVGPong } from "./SVGPong.js";
 // import { PongTestArea } from "./PongTestArea.js";
 import { calculateFPS } from "./fps.js";
+
+const svgParams = {
+  bounds: {
+    top: 0,
+    right: 500,
+    bottom: 400,
+    left: 0,
+  },
+};
 
 const params = {
   ball: {
@@ -25,6 +35,7 @@ const parentElement = document.getElementById("main");
 
 // const testArea = new PongTestArea(bounds, parentElement);
 const pong = new Pong(params, parentElement);
+const svgPong = new SVGPong(svgParams);
 
 loop();
 
