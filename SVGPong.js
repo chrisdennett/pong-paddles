@@ -5,36 +5,22 @@ export class SVGPong {
   constructor(params) {
     this.bounds = params.bounds;
     this.svg = document.getElementById("svgPong");
+    this.svg.style.width = `${params.displayWidth}px`;
 
+    // game elements
     this.ballElem = document.getElementById("svgBall");
     const paddleLeftElem = document.getElementById("paddleLeft");
     const paddleRightElem = document.getElementById("paddleRight");
 
-    // ballElem.style.transform = `translate(${this.ballParams.right}px, ${this.ballParams.top}px)`;
-    this.ballElem.style.fill = `#ff0000`;
+    this.ballElem.style.fill = params.ball.colour;
 
-    // paddleLeftElem.style.transform = `translate(${this.gameBounds.left}px, ${this.gameBounds.top}px)`;
-    // paddleLeftElem.style.fill = `#ff0000`;
+    paddleLeftElem.style.transform = `translate(${this.bounds.left}px, ${this.bounds.top}px)`;
+    paddleLeftElem.style.fill = params.paddle.colour;
 
-    // paddleRightElem.style.transform = `translate(${this.paddleParams.right}px, ${this.paddleParams.bottom}px)`;
-    // paddleRightElem.style.fill = `#ff0000`;
-
-    this.svg.style.width = `${this.bounds.right}px`;
-    this.svg.style.height = `${this.bounds.bottom}px`;
-
-    // this.ball = new Ball(this.svg, params);
-    // this.paddleLeft = new Paddle({
-    //   side: "left",
-    //   parentElement: this.svg,
-    //   ball: this.ball,
-    //   params,
-    // });
-    // this.paddleRight = new Paddle({
-    //   side: "right",
-    //   parentElement: this.svg,
-    //   ball: this.ball,
-    //   params,
-    // });
+    const paddleRightX = this.bounds.right - params.paddle.width;
+    this.paddleBottomY = this.bounds.bottom - params.paddle.height;
+    paddleRightElem.style.transform = `translate(${paddleRightX}px, ${this.paddleBottomY}px)`;
+    paddleRightElem.style.fill = params.paddle.colour;
   }
 
   draw(dataPong) {
