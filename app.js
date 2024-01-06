@@ -10,16 +10,16 @@ console.log("infoListElem: ", infoListElem);
 
 const pongData = {
   ball: {
-    vx: 1,
-    vy: 2,
-    width: 10,
-    height: 10,
+    vx: 3,
+    vy: 4,
+    width: 5.3,
+    height: 5.3,
   },
   bounds: {
-    top: 0,
-    right: 1000,
-    bottom: 800,
-    left: 0,
+    top: 28.2,
+    right: 240,
+    bottom: 192,
+    left: 37,
   },
 };
 
@@ -86,6 +86,7 @@ function loop() {
   dataPong.update();
   pong.update();
   info.update();
+  svgPong.draw(dataPong);
   //   testArea.update();
 
   // Calculate and display FPS
