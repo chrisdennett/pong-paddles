@@ -1,7 +1,27 @@
+import { DataPong } from "./DataPong.js";
+import { Info } from "./Info.js";
 import { Pong } from "./Pong.js";
 import { SVGPong } from "./SVGPong.js";
 // import { PongTestArea } from "./PongTestArea.js";
 import { calculateFPS } from "./fps.js";
+
+const infoListElem = document.getElementById("infoList");
+console.log("infoListElem: ", infoListElem);
+
+const pongData = {
+  ball: {
+    vx: 1,
+    vy: 2,
+    width: 10,
+    height: 10,
+  },
+  bounds: {
+    top: 0,
+    right: 1000,
+    bottom: 800,
+    left: 0,
+  },
+};
 
 const svgParams = {
   ball: {
@@ -53,13 +73,19 @@ const params = {
 const parentElement = document.getElementById("main");
 
 // const testArea = new PongTestArea(bounds, parentElement);
+const dataPong = new DataPong(pongData);
 const pong = new Pong(params, parentElement);
 const svgPong = new SVGPong(svgParams);
+const info = new Info(dataPong, infoListElem);
+
+dataPong.serve(false);
 
 loop();
 
 function loop() {
+  dataPong.update();
   pong.update();
+  info.update();
   //   testArea.update();
 
   // Calculate and display FPS

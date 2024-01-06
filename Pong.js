@@ -1,4 +1,3 @@
-import { Info } from "./Info.js";
 import { Paddle } from "./Paddle.js";
 import { Ball } from "/Ball.js";
 
@@ -29,7 +28,6 @@ export class Pong {
       ball: this.ball,
       params,
     });
-    this.info = new Info(this.ball);
   }
 
   addScores() {
@@ -73,7 +71,6 @@ export class Pong {
     this.ball.update();
     this.paddleLeft.update();
     this.paddleRight.update();
-    this.info.update();
 
     const paddleLeftHit = this.checkPaddleLeftHit();
     const paddleRightHit = this.checkPaddleRightHit();

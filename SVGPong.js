@@ -1,4 +1,3 @@
-import { Info } from "./Info.js";
 import { Paddle } from "./Paddle.js";
 import { Ball } from "/Ball.js";
 
@@ -54,7 +53,6 @@ export class SVGPong {
       ball: this.ball,
       params,
     });
-    this.info = new Info(this.ball);
   }
 
   onPointScored(wonBy) {
