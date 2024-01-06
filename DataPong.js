@@ -9,6 +9,8 @@ export class DataPong {
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });
     this.paddleRight = new DataPaddle({ bounds, ...paddle, type: "right" });
+
+    this.state = "demo";
   }
 
   serve(toLeft) {
@@ -17,5 +19,10 @@ export class DataPong {
 
   update() {
     this.ball.update();
+
+    if (this.state === "demo") {
+      this.paddleLeft.followBall(this.ball);
+      this.paddleRight.followBall(this.ball);
+    }
   }
 }

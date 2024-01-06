@@ -7,6 +7,8 @@ export class Info {
     this.ballY = this.addInfo("ball y");
     this.ballSpeedX = this.addInfo("ball speed x");
     this.ballSpeedY = this.addInfo("ball speed y");
+    this.paddleLeftY = this.addInfo("left paddle y");
+    this.paddleRightY = this.addInfo("right paddle y");
   }
 
   addInfo(name) {
@@ -24,8 +26,9 @@ export class Info {
     this.ballY.innerHTML = this.dataPong.ball.y;
     this.ballSpeedX.innerHTML = this.dataPong.ball.vx;
     this.ballSpeedY.innerHTML = this.dataPong.ball.vy;
+
+    this.paddleLeftY.innerHTML = this.dataPong.paddleLeft.y;
+    this.paddleRightY.innerHTML = this.dataPong.paddleRight.y;
     // this.ballDirElem.innerHTML = this.ball.vx < 0 ? "left" : "right";
-    // this.ballSpeedXElem.innerHTML = this.ball.vx;
-    // this.ballSpeedYElem.innerHTML = this.ball.vy;
   }
 }

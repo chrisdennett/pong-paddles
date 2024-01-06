@@ -9,19 +9,31 @@ export class SVGPong {
 
     // game elements
     this.ballElem = document.getElementById("svgBall");
-    const paddleLeftElem = document.getElementById("paddleLeft");
-    const paddleRightElem = document.getElementById("paddleRight");
+    this.leftPaddle = document.getElementById("paddleLeft");
+    this.rightPaddle = document.getElementById("paddleRight");
 
     this.ballElem.style.fill = dataPong.ball.colour;
 
-    paddleLeftElem.style.transform = `translate(${dataPong.paddleLeft.x}px, ${dataPong.paddleRight.bounds.top}px)`;
-    paddleLeftElem.style.fill = dataPong.paddleLeft.colour;
-    paddleRightElem.style.transform = `translate(${dataPong.paddleRight.x}px, ${dataPong.paddleRight.bounds.bottom}px)`;
-    paddleRightElem.style.fill = dataPong.paddleRight.colour;
+    this.leftPaddle.style.fill = dataPong.paddleLeft.colour;
+    this.rightPaddle.style.fill = dataPong.paddleRight.colour;
   }
 
   draw(dataPong) {
-    this.ballElem.style.transform = `translate(${dataPong.ball.x}px, ${dataPong.ball.y}px)`;
+    this.positionElement(this.ballElem, dataPong.ball.x, dataPong.ball.y);
+    this.positionElement(
+      this.leftPaddle,
+      dataPong.paddleLeft.x,
+      dataPong.paddleLeft.y
+    );
+    this.positionElement(
+      this.rightPaddle,
+      dataPong.paddleRight.x,
+      dataPong.paddleRight.y
+    );
+  }
+
+  positionElement(element, x, y) {
+    element.style.transform = `translate(${x}px, ${y}px)`;
   }
 
   // onPointScored(wonBy) {
