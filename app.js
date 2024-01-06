@@ -10,21 +10,21 @@ console.log("infoListElem: ", infoListElem);
 
 const pongData = {
   displayWidth: 800,
-  ball: {
-    colour: "#ffff00",
-    vx: 3,
-    vy: 4,
-    width: 5.3,
-    height: 5.3,
-  },
   bounds: {
     top: 28.2,
     right: 240,
     bottom: 192,
     left: 37,
   },
+  ball: {
+    colour: "#ffffff",
+    vx: 3,
+    vy: 4,
+    width: 5.3,
+    height: 5.3,
+  },
   paddle: {
-    colour: "#00ff00",
+    colour: "#ffffff",
     width: 5.3,
     height: 21.2,
     speed: 6,
@@ -83,7 +83,7 @@ const parentElement = document.getElementById("main");
 // const testArea = new PongTestArea(bounds, parentElement);
 const dataPong = new DataPong(pongData);
 const pong = new Pong(params, parentElement);
-const svgPong = new SVGPong(pongData);
+const svgPong = new SVGPong(dataPong);
 const info = new Info(dataPong, infoListElem);
 
 dataPong.serve(false);

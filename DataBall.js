@@ -1,6 +1,7 @@
-export class PongBall {
+export class DataBall {
   constructor(params) {
     this.params = params;
+    this.colour = params.colour;
     this.bounds = params.bounds;
     this.width = this.params.width;
     this.height = this.params.height;

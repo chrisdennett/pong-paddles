@@ -2,25 +2,22 @@ import { Paddle } from "./Paddle.js";
 import { Ball } from "/Ball.js";
 
 export class SVGPong {
-  constructor(params) {
-    this.bounds = params.bounds;
+  constructor(dataPong) {
+    this.bounds = dataPong.bounds;
     this.svg = document.getElementById("svgPong");
-    this.svg.style.width = `${params.displayWidth}px`;
+    this.svg.style.width = `${dataPong.displayWidth}px`;
 
     // game elements
     this.ballElem = document.getElementById("svgBall");
     const paddleLeftElem = document.getElementById("paddleLeft");
     const paddleRightElem = document.getElementById("paddleRight");
 
-    this.ballElem.style.fill = params.ball.colour;
+    this.ballElem.style.fill = dataPong.ball.colour;
 
-    paddleLeftElem.style.transform = `translate(${this.bounds.left}px, ${this.bounds.top}px)`;
-    paddleLeftElem.style.fill = params.paddle.colour;
-
-    const paddleRightX = this.bounds.right - params.paddle.width;
-    this.paddleBottomY = this.bounds.bottom - params.paddle.height;
-    paddleRightElem.style.transform = `translate(${paddleRightX}px, ${this.paddleBottomY}px)`;
-    paddleRightElem.style.fill = params.paddle.colour;
+    paddleLeftElem.style.transform = `translate(${dataPong.paddleLeft.x}px, ${dataPong.paddleRight.bounds.top}px)`;
+    paddleLeftElem.style.fill = dataPong.paddleLeft.colour;
+    paddleRightElem.style.transform = `translate(${dataPong.paddleRight.x}px, ${dataPong.paddleRight.bounds.bottom}px)`;
+    paddleRightElem.style.fill = dataPong.paddleRight.colour;
   }
 
   draw(dataPong) {
