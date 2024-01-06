@@ -1,6 +1,7 @@
 export class DataPaddle {
   constructor(params) {
     this.params = params;
+    this.width = params.width;
     this.speed = params.speed;
     this.height = params.height;
     this.colour = params.colour;
