@@ -11,10 +11,16 @@ export class SVGPong {
     this.ballElem = document.getElementById("svgBall");
     this.leftPaddle = document.getElementById("paddleLeft");
     this.rightPaddle = document.getElementById("paddleRight");
+    this.netMiddle = document.getElementById("netMiddle");
 
     // score text
     this.scoreLeft = document.getElementById("scoreLeft");
     this.scoreRight = document.getElementById("scoreRight");
+
+    // game over content
+    this.gameOverContent = document.getElementById("gameOverContent");
+    this.gameOverWinnerText = document.getElementById("gameOverWinnerText");
+    this.gameOverContent.style.display = "none";
 
     this.ballElem.style.fill = dataPong.ball.colour;
 
@@ -23,17 +29,29 @@ export class SVGPong {
   }
 
   draw(dataPong) {
-    this.positionElement(this.ballElem, dataPong.ball.x, dataPong.ball.y);
-    this.positionElement(
-      this.leftPaddle,
-      dataPong.paddleLeft.x,
-      dataPong.paddleLeft.y
-    );
-    this.positionElement(
-      this.rightPaddle,
-      dataPong.paddleRight.x,
-      dataPong.paddleRight.y
-    );
+    if (dataPong.gameState === "gameOver") {
+      this.netMiddle.style.display = "none";
+      this.gameOverContent.style.display = "inherit";
+
+      const playerTwoWon = dataPong.winner === "p2";
+      const winText = `PLAYER ${playerTwoWon ? "TWO" : "ONE"} WINS`;
+
+      gameOverWinnerText.innerHTML = winText;
+    }
+
+    if (dataPong.gameState === "playing") {
+      this.positionElement(this.ballElem, dataPong.ball.x, dataPong.ball.y);
+      this.positionElement(
+        this.leftPaddle,
+        dataPong.paddleLeft.x,
+        dataPong.paddleLeft.y
+      );
+      this.positionElement(
+        this.rightPaddle,
+        dataPong.paddleRight.x,
+        dataPong.paddleRight.y
+      );
+    }
 
     this.scoreLeft.innerHTML = dataPong.score.p1;
     this.scoreRight.innerHTML = dataPong.score.p2;

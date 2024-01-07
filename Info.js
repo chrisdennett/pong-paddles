@@ -14,6 +14,7 @@ export class Info {
     this.playerTwoScore = this.addInfo("Player two score");
     this.gameState = this.addInfo("Game State");
     this.gameMode = this.addInfo("Game Mode");
+    this.winner = this.addInfo("Winner");
   }
 
   addInfo(name) {
@@ -41,6 +42,7 @@ export class Info {
 
     this.gameState.innerHTML = this.dataPong.gameState;
     this.gameMode.innerHTML = this.dataPong.gameMode;
-    // this.ballDirElem.innerHTML = this.ball.vx < 0 ? "left" : "right";
+
+    this.winner.innerHTML = this.dataPong.winner;
   }
 }

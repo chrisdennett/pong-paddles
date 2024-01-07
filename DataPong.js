@@ -7,7 +7,7 @@ export class DataPong {
     this.params = params;
     this.winningScore = winningScore; // set here for convenience
     this.gameMode = "demo";
-    this.gameState = "playing"; // "playing", "gameWon", "menu"
+    this.gameState = "playing"; // "playing", "gameOver", "menu"
     this.winner = "";
     this.score = { p1: 0, p2: 0 };
     this.ball = new DataBall({ bounds, ...ball });

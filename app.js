@@ -10,7 +10,7 @@ const infoListElem = document.getElementById("infoList");
 const pongData = {
   displayWidth: 800,
   delayAfterPoint: 1000,
-  winningScore: 2,
+  winningScore: 1,
   bounds: {
     top: 28.2,
     right: 240,
@@ -28,7 +28,7 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 11,
+    speed: 1,
   },
 };
 
@@ -85,7 +85,7 @@ const dataPong = new DataPong(pongData);
 const svgPong = new SVGPong(dataPong);
 const info = new Info(dataPong, infoListElem);
 
-dataPong.serve(false);
+dataPong.startGame();
 
 loop();
 
