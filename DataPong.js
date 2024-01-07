@@ -10,8 +10,6 @@ export class DataPong {
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });
     this.paddleRight = new DataPaddle({ bounds, ...paddle, type: "right" });
-
-    this.state = "demo";
   }
 
   serve(toLeft) {
@@ -21,7 +19,7 @@ export class DataPong {
   update() {
     this.ball.update();
 
-    if (this.state === "demo") {
+    if (this.params.gameMode === "demo") {
       this.paddleLeft.followBall(this.ball);
       this.paddleRight.followBall(this.ball);
     }
@@ -50,7 +48,8 @@ export class DataPong {
         this.ball.y <= this.paddleLeft.y + this.paddleLeft.height;
 
       if (!leftPaddleContact) {
-        this.onPointScored(true);
+        // missed by left paddle (player one)
+        this.onPointScored(false);
       }
     } else if (this.ball.x + this.ball.width >= this.paddleRight.x) {
       const rightPaddleContact =
@@ -58,7 +57,8 @@ export class DataPong {
         this.ball.y <= this.paddleRight.y + this.paddleRight.height;
 
       if (!rightPaddleContact) {
-        this.onPointScored(false);
+        // missed by right paddle (player two)
+        this.onPointScored(true);
       }
     }
   }

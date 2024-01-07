@@ -12,6 +12,10 @@ export class SVGPong {
     this.leftPaddle = document.getElementById("paddleLeft");
     this.rightPaddle = document.getElementById("paddleRight");
 
+    // score text
+    this.scoreLeft = document.getElementById("scoreLeft");
+    this.scoreRight = document.getElementById("scoreRight");
+
     this.ballElem.style.fill = dataPong.ball.colour;
 
     this.leftPaddle.style.fill = dataPong.paddleLeft.colour;
@@ -30,6 +34,9 @@ export class SVGPong {
       dataPong.paddleRight.x,
       dataPong.paddleRight.y
     );
+
+    this.scoreLeft.innerHTML = dataPong.score.p1;
+    this.scoreRight.innerHTML = dataPong.score.p2;
   }
 
   positionElement(element, x, y) {

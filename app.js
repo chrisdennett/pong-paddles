@@ -10,6 +10,7 @@ const infoListElem = document.getElementById("infoList");
 const pongData = {
   displayWidth: 800,
   delayAfterPoint: 1000,
+  gameMode: "demo",
   bounds: {
     top: 28.2,
     right: 240,
@@ -27,7 +28,7 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 4,
+    speed: 11,
   },
   score: {
     winningScore: 11,
