@@ -3,12 +3,14 @@ export class Info {
     this.dataPong = dataPong;
     this.parentElem = parentElem;
 
-    this.ballX = this.addInfo("ball x");
-    this.ballY = this.addInfo("ball y");
-    this.ballSpeedX = this.addInfo("ball speed x");
-    this.ballSpeedY = this.addInfo("ball speed y");
-    this.paddleLeftY = this.addInfo("left paddle y");
-    this.paddleRightY = this.addInfo("right paddle y");
+    this.ballX = this.addInfo("Ball x");
+    this.ballY = this.addInfo("Ball y");
+    this.ballSpeedX = this.addInfo("Ball speed x");
+    this.ballSpeedY = this.addInfo("Ball speed y");
+    this.paddleLeftY = this.addInfo("Left paddle y");
+    this.paddleRightY = this.addInfo("Right paddle y");
+    this.playerOneScore = this.addInfo("Player one score");
+    this.playerTwoScore = this.addInfo("Player two score");
   }
 
   addInfo(name) {
@@ -29,6 +31,9 @@ export class Info {
 
     this.paddleLeftY.innerHTML = this.dataPong.paddleLeft.y;
     this.paddleRightY.innerHTML = this.dataPong.paddleRight.y;
+
+    this.playerOneScore.innerHTML = this.dataPong.score.p1;
+    this.playerTwoScore.innerHTML = this.dataPong.score.p2;
     // this.ballDirElem.innerHTML = this.ball.vx < 0 ? "left" : "right";
   }
 }

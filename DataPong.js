@@ -5,7 +5,7 @@ export class DataPong {
   constructor(params) {
     const { bounds, paddle, ball } = params;
     this.bounds = bounds;
-    this.score = { p1: 0, p2: 0 };
+    this.score = params.score;
     this.params = params;
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });
@@ -36,7 +36,7 @@ export class DataPong {
         this.ball.y <= this.paddleLeft.y + this.paddleLeft.height;
 
       if (!leftPaddleContact) {
-        console.log("p2 scores");
+        this.params.score.p1++;
       }
     } else if (this.ball.x + this.ball.width >= this.paddleRight.x) {
       const rightPaddleContact =
@@ -44,7 +44,7 @@ export class DataPong {
         this.ball.y <= this.paddleRight.y + this.paddleRight.height;
 
       if (!rightPaddleContact) {
-        console.log("p1 scores!");
+        this.params.score.p2++;
       }
     }
   }

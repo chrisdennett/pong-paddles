@@ -30,7 +30,7 @@ export class DataBall {
   serve(toLeft) {
     this.vx = toLeft ? -this.params.vx : this.params.vx;
     // random angle from zero up to vy set in params
-    this.vy = Math.random() * this.params.vy;
+    this.vy = this.params.vy;
   }
 
   restictToBounds() {

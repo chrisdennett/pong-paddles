@@ -26,7 +26,12 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 6,
+    speed: 4,
+  },
+  score: {
+    winningScore: 11,
+    p1: 0,
+    p2: 0,
   },
 };
 
