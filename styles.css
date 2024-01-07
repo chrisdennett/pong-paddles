@@ -91,3 +91,24 @@ h1 {
 .player2Score {
   right: 100px;
 }
+
+#gradientOverlay {
+  mix-blend-mode: hard-light;
+  opacity: 0.5;
+}
+
+#gradientOverlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}

@@ -3,13 +3,21 @@ import { DataPaddle } from "./DataPaddle.js";
 
 export class DataPong {
   constructor(params) {
-    const { bounds, paddle, ball } = params;
-    this.bounds = bounds;
-    this.score = params.score;
+    const { bounds, paddle, ball, winningScore } = params;
     this.params = params;
+    this.winningScore = winningScore; // set here for convenience
+    this.gameMode = "demo";
+    this.gameState = "playing"; // "playing", "gameWon", "menu"
+    this.winner = "";
+    this.score = { p1: 0, p2: 0 };
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });
     this.paddleRight = new DataPaddle({ bounds, ...paddle, type: "right" });
+  }
+
+  startGame() {
+    const serveLeft = Math.random() < 0.5;
+    this.serve(serveLeft);
   }
 
   serve(toLeft) {
@@ -19,7 +27,7 @@ export class DataPong {
   update() {
     this.ball.update();
 
-    if (this.params.gameMode === "demo") {
+    if (this.gameMode === "demo") {
       this.paddleLeft.followBall(this.ball);
       this.paddleRight.followBall(this.ball);
     }
@@ -28,17 +36,42 @@ export class DataPong {
   }
 
   onPointScored(byPlayerOne) {
+    // put ball back to center spot
     this.ball.reset();
 
+    // increase the relevant score
     if (byPlayerOne) {
-      this.params.score.p1++;
+      this.score.p1++;
     } else {
-      this.params.score.p2++;
+      this.score.p2++;
     }
 
-    setTimeout(() => {
-      this.ball.serve(!byPlayerOne);
-    }, this.params.delayAfterPoint);
+    const gameOver = this.checkForWinner();
+
+    if (!gameOver) {
+      // start serve
+      setTimeout(() => {
+        this.ball.serve(!byPlayerOne);
+      }, this.params.delayAfterPoint);
+    }
+  }
+
+  checkForWinner() {
+    let isWinner = false;
+
+    if (this.score.p1 === this.params.winningScore) {
+      this.winner = "p1";
+      isWinner = true;
+    } else if (this.score.p2 === this.params.winningScore) {
+      this.winner = "p2";
+      isWinner = true;
+    }
+
+    this.gameState = isWinner ? "gameOver" : "playing";
+
+    // if winner show
+
+    return isWinner;
   }
 
   checkPointScored() {
