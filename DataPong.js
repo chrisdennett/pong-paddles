@@ -25,6 +25,10 @@ export class DataPong {
   }
 
   update() {
+    if (this.gameState !== "playing") {
+      return;
+    }
+
     this.ball.update();
 
     if (this.gameMode === "demo") {
