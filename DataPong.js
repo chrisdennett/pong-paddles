@@ -16,6 +16,10 @@ export class DataPong {
   }
 
   startGame() {
+    this.gameState = "playing";
+    this.score = { p1: 0, p2: 0 };
+    this.paddleLeft.reset();
+    this.paddleRight.reset();
     const serveLeft = Math.random() < 0.5;
     this.serve(serveLeft);
   }
@@ -29,14 +33,14 @@ export class DataPong {
       return;
     }
 
+    this.checkPointScored();
+
     this.ball.update();
 
     if (this.gameMode === "demo") {
       this.paddleLeft.followBall(this.ball);
       this.paddleRight.followBall(this.ball);
     }
-
-    this.checkPointScored();
   }
 
   onPointScored(byPlayerOne) {
@@ -51,9 +55,14 @@ export class DataPong {
     }
 
     const gameOver = this.checkForWinner();
-
-    if (!gameOver) {
-      // start serve
+    // game over - start new game after a delay
+    if (gameOver) {
+      setTimeout(() => {
+        this.startGame();
+      }, this.params.delayRestartAfterWin);
+    }
+    // point over serve after a delay
+    else {
       setTimeout(() => {
         this.ball.serve(!byPlayerOne);
       }, this.params.delayAfterPoint);

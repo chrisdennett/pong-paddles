@@ -3,6 +3,7 @@ import { Ball } from "/Ball.js";
 
 export class SVGPong {
   constructor(dataPong) {
+    this.dataPong = dataPong;
     this.bounds = dataPong.bounds;
     this.svg = document.getElementById("svgPong");
     this.svg.style.width = `${dataPong.displayWidth}px`;
@@ -28,33 +29,48 @@ export class SVGPong {
     this.rightPaddle.style.fill = dataPong.paddleRight.colour;
   }
 
-  draw(dataPong) {
-    if (dataPong.gameState === "gameOver") {
-      this.netMiddle.style.display = "none";
-      this.gameOverContent.style.display = "inherit";
+  showGameOverScreen() {
+    this.netMiddle.style.display = "none";
+    this.gameOverContent.style.display = "inherit";
 
-      const playerTwoWon = dataPong.winner === "p2";
-      const winText = `PLAYER ${playerTwoWon ? "TWO" : "ONE"} WINS`;
+    const playerTwoWon = this.dataPong.winner === "p2";
+    const winText = `PLAYER ${playerTwoWon ? "TWO" : "ONE"} WINS`;
 
-      gameOverWinnerText.innerHTML = winText;
+    gameOverWinnerText.innerHTML = winText;
+  }
+
+  hideGameOverScreen() {
+    this.netMiddle.style.display = "inherit";
+    this.gameOverContent.style.display = "none";
+  }
+
+  draw() {
+    if (this.dataPong.gameState === "gameOver") {
+      this.showGameOverScreen();
+    } else {
+      this.hideGameOverScreen();
     }
 
-    if (dataPong.gameState === "playing") {
-      this.positionElement(this.ballElem, dataPong.ball.x, dataPong.ball.y);
+    if (this.dataPong.gameState === "playing") {
+      this.positionElement(
+        this.ballElem,
+        this.dataPong.ball.x,
+        this.dataPong.ball.y
+      );
       this.positionElement(
         this.leftPaddle,
-        dataPong.paddleLeft.x,
-        dataPong.paddleLeft.y
+        this.dataPong.paddleLeft.x,
+        this.dataPong.paddleLeft.y
       );
       this.positionElement(
         this.rightPaddle,
-        dataPong.paddleRight.x,
-        dataPong.paddleRight.y
+        this.dataPong.paddleRight.x,
+        this.dataPong.paddleRight.y
       );
     }
 
-    this.scoreLeft.innerHTML = dataPong.score.p1;
-    this.scoreRight.innerHTML = dataPong.score.p2;
+    this.scoreLeft.innerHTML = this.dataPong.score.p1;
+    this.scoreRight.innerHTML = this.dataPong.score.p2;
   }
 
   positionElement(element, x, y) {

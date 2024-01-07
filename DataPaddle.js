@@ -13,7 +13,11 @@ export class DataPaddle {
       top: params.bounds.top,
       bottom: params.bounds.bottom - params.height,
     };
-    this.y = params.bounds.bottom / 2;
+    this.reset();
+  }
+
+  reset() {
+    this.y = this.params.bounds.bottom / 2;
   }
 
   followBall(ball) {

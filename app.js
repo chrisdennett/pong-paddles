@@ -10,7 +10,8 @@ const infoListElem = document.getElementById("infoList");
 const pongData = {
   displayWidth: 800,
   delayAfterPoint: 1000,
-  winningScore: 1,
+  delayRestartAfterWin: 2000,
+  winningScore: 11,
   bounds: {
     top: 28.2,
     right: 240,
@@ -28,7 +29,7 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 1,
+    speed: 6,
   },
 };
 
@@ -93,7 +94,7 @@ function loop() {
   dataPong.update();
   // pong.update();
   info.update();
-  svgPong.draw(dataPong);
+  svgPong.draw();
   //   testArea.update();
 
   // Calculate and display FPS
