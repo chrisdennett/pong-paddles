@@ -93,7 +93,9 @@ export class DataPong {
         this.ball.y + this.ball.height >= this.paddleLeft.y &&
         this.ball.y <= this.paddleLeft.y + this.paddleLeft.height;
 
-      if (!leftPaddleContact) {
+      if (leftPaddleContact) {
+        this.ball.return();
+      } else {
         // missed by left paddle (player one)
         this.onPointScored(false);
       }
@@ -102,7 +104,9 @@ export class DataPong {
         this.ball.y + this.ball.height >= this.paddleRight.y &&
         this.ball.y <= this.paddleRight.y + this.paddleRight.height;
 
-      if (!rightPaddleContact) {
+      if (rightPaddleContact) {
+        this.ball.return();
+      } else {
         // missed by right paddle (player two)
         this.onPointScored(true);
       }

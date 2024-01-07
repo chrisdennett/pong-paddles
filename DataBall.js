@@ -31,22 +31,32 @@ export class DataBall {
 
   serve(toLeft) {
     this.center();
-    this.vx = toLeft ? -this.params.vx : this.params.vx;
-    // random angle from zero up to vy set in params
-    this.vy = this.params.vy;
+    this.vx = toLeft ? -this.params.serveVx : this.params.serveVx;
+    this.vy = Math.random() < 0.5 ? this.params.serveVy : -this.params.serveVy;
+  }
+
+  return() {
+    this.vx = -this.vx;
+
+    const isNegative = this.vx < 1;
+
+    if (Math.abs(this.vx) < this.params.vx) {
+      let inc = this.params.vx / 10;
+      if (isNegative) {
+        inc = -inc;
+      }
+      this.vx += inc;
+    }
+    if (Math.abs(this.vy) < this.params.vy) {
+      let inc = this.params.vy / 10;
+      if (isNegative) {
+        inc = -inc;
+      }
+      this.vy += inc;
+    }
   }
 
   restictToBounds() {
-    if (this.x >= this.bounds.right - this.width) {
-      this.x = this.bounds.right - this.width;
-      this.vx = -this.vx;
-    }
-
-    if (this.x < this.bounds.left) {
-      this.x = this.bounds.left;
-      this.vx = -this.vx;
-    }
-
     if (this.y >= this.bounds.bottom - this.height) {
       this.y = this.bounds.bottom - this.height;
       this.vy = -this.vy;
@@ -55,6 +65,16 @@ export class DataBall {
     if (this.y < this.bounds.top) {
       this.y = this.bounds.top;
       this.vy = -this.vy;
+    }
+
+    // only needed if want the ball to bound off the side walls
+    if (this.x >= this.bounds.right - this.width) {
+      this.x = this.bounds.right - this.width;
+      this.vx = -this.vx;
+    }
+    if (this.x < this.bounds.left) {
+      this.x = this.bounds.left;
+      this.vx = -this.vx;
     }
   }
 }

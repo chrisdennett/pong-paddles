@@ -4,13 +4,10 @@
 
 ## TODO
 
-- move all params to a central state object.
+- get the serve starting slowler than usual until hit for the first time.
 - stop the jerky motion
 - add sounds
-- Adjust simulation so paddles behave a bit more randomly / naturally
-- have the simulated paddles hit the ball with different parst of the paddle. This may happen naturally if they are slowed down.
-- have the simlated players winning and losing points.
-- get the serve starting from the middle line and going slowler than usual until hit for the first time.
+- have the simulated paddles hit the ball with different parts of the paddle. This may happen naturally if they are slowed down.
 
 ## ideas
 
@@ -19,4 +16,4 @@
 - change paddle colour on hit
 - shake play area on hit
 - try moving middle barrier
-- change bat size if score - smaller if score point, larger if lose point
+- change bat size if you score a point - smaller if score point, larger if lose point

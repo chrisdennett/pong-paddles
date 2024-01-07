@@ -20,6 +20,8 @@ const pongData = {
   },
   ball: {
     colour: "#ffffff",
+    serveVx: 1,
+    serveVy: 2,
     vx: 3,
     vy: 4,
     width: 5.3,
