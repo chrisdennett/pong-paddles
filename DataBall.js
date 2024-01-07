@@ -41,18 +41,11 @@ export class DataBall {
     const isNegative = this.vx < 1;
 
     if (Math.abs(this.vx) < this.params.vx) {
-      let inc = this.params.vx / 10;
+      let inc = 0.1;
       if (isNegative) {
         inc = -inc;
       }
       this.vx += inc;
-    }
-    if (Math.abs(this.vy) < this.params.vy) {
-      let inc = this.params.vy / 10;
-      if (isNegative) {
-        inc = -inc;
-      }
-      this.vy += inc;
     }
   }
 
