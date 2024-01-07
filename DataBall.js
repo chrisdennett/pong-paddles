@@ -17,8 +17,10 @@ export class DataBall {
   }
 
   center() {
-    this.x = this.bounds.right / 2 - this.width / 2;
-    this.y = this.bounds.bottom / 2 - this.height / 2;
+    const w = this.bounds.right - this.bounds.left;
+    const h = this.bounds.bottom - this.bounds.top;
+    this.x = this.bounds.left + w / 2 - this.width / 2;
+    this.y = this.bounds.top + h / 2 - this.height / 2;
   }
 
   reset() {
@@ -28,6 +30,7 @@ export class DataBall {
   }
 
   serve(toLeft) {
+    this.center();
     this.vx = toLeft ? -this.params.vx : this.params.vx;
     // random angle from zero up to vy set in params
     this.vy = this.params.vy;

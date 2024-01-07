@@ -29,6 +29,21 @@ export class DataPong {
     this.checkPointScored();
   }
 
+  onPointScored(byPlayerOne) {
+    this.ball.reset();
+
+    if (byPlayerOne) {
+      this.params.score.p1++;
+    } else {
+      this.params.score.p2++;
+    }
+
+    setTimeout(() => {
+      console.log("why hello there");
+      this.ball.serve(!byPlayerOne);
+    }, 1000);
+  }
+
   checkPointScored() {
     if (this.ball.x <= this.paddleLeft.x + this.paddleLeft.width) {
       const leftPaddleContact =
@@ -36,7 +51,7 @@ export class DataPong {
         this.ball.y <= this.paddleLeft.y + this.paddleLeft.height;
 
       if (!leftPaddleContact) {
-        this.params.score.p1++;
+        this.onPointScored(true);
       }
     } else if (this.ball.x + this.ball.width >= this.paddleRight.x) {
       const rightPaddleContact =
@@ -44,7 +59,7 @@ export class DataPong {
         this.ball.y <= this.paddleRight.y + this.paddleRight.height;
 
       if (!rightPaddleContact) {
-        this.params.score.p2++;
+        this.onPointScored(false);
       }
     }
   }
