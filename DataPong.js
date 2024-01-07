@@ -39,9 +39,8 @@ export class DataPong {
     }
 
     setTimeout(() => {
-      console.log("why hello there");
       this.ball.serve(!byPlayerOne);
-    }, 1000);
+    }, this.params.delayAfterPoint);
   }
 
   checkPointScored() {

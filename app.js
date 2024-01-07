@@ -1,6 +1,6 @@
 import { DataPong } from "./DataPong.js";
 import { Info } from "./Info.js";
-import { Pong } from "./Pong.js";
+// import { Pong } from "./Pong.js";
 import { SVGPong } from "./SVGPong.js";
 // import { PongTestArea } from "./PongTestArea.js";
 import { calculateFPS } from "./fps.js";
@@ -9,6 +9,7 @@ const infoListElem = document.getElementById("infoList");
 
 const pongData = {
   displayWidth: 800,
+  delayAfterPoint: 1000,
   bounds: {
     top: 28.2,
     right: 240,
