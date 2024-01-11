@@ -20,6 +20,16 @@ export class DataPaddle {
     this.y = this.params.bounds.bottom / 2;
   }
 
+  moveUp() {
+    this.y -= this.speed;
+    this.restrictToBounds();
+  }
+
+  moveDown() {
+    this.y += this.speed;
+    this.restrictToBounds();
+  }
+
   followBall(ball) {
     const paddleIsBelowBall = this.y >= ball.y;
     const paddleIsAboveBall = this.y + this.height < ball.y;
@@ -43,8 +53,8 @@ export class DataPaddle {
   }
 
   restrictToBounds() {
-    if (this.y < 0) {
-      this.y = 0;
+    if (this.y < this.bounds.top) {
+      this.y = this.bounds.top;
     }
 
     if (this.y > this.bounds.bottom) {

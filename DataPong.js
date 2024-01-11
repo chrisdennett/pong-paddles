@@ -1,18 +1,27 @@
 import { DataBall } from "./DataBall.js";
+import { DataInputs } from "./DataInputs.js";
 import { DataPaddle } from "./DataPaddle.js";
 
 export class DataPong {
   constructor(params) {
-    const { bounds, paddle, ball, winningScore } = params;
+    const { bounds, paddle, ball, winningScore, gameMode } = params;
     this.params = params;
     this.winningScore = winningScore; // set here for convenience
-    this.gameMode = "demo";
+    // demo, onePlayer, twoPlayer,
+    // demoDoubles, onePlayerDoubles, twoPlayerDoubles
+    this.gameMode = gameMode;
     this.gameState = "playing"; // "playing", "gameOver", "menu"
     this.winner = "";
     this.score = { p1: 0, p2: 0 };
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });
     this.paddleRight = new DataPaddle({ bounds, ...paddle, type: "right" });
+    if (this.gameMode === "onePlayer") {
+      this.paddleRight.speed = paddle.computerSpeed;
+      console.log("this.paddleRight.speed: ", this.paddleRight.speed);
+    }
+    this.dataInputs = new DataInputs({});
+    this.serveLeft = false;
   }
 
   startGame() {
@@ -20,12 +29,12 @@ export class DataPong {
     this.score = { p1: 0, p2: 0 };
     this.paddleLeft.reset();
     this.paddleRight.reset();
-    const serveLeft = Math.random() < 0.5;
-    this.serve(serveLeft);
+    this.serve();
   }
 
-  serve(toLeft) {
-    this.ball.serve(toLeft);
+  serve() {
+    this.ball.serve(this.serveLeft);
+    this.serveLeft = !this.serveLeft;
   }
 
   update() {
@@ -39,6 +48,14 @@ export class DataPong {
 
     if (this.gameMode === "demo") {
       this.paddleLeft.followBall(this.ball);
+      this.paddleRight.followBall(this.ball);
+    } else if (this.gameMode === "onePlayer") {
+      this.dataInputs.update();
+      if (this.dataInputs.playerOne.up) {
+        this.paddleLeft.moveUp();
+      } else if (this.dataInputs.playerOne.down) {
+        this.paddleLeft.moveDown();
+      }
       this.paddleRight.followBall(this.ball);
     }
   }
@@ -64,7 +81,7 @@ export class DataPong {
     // point over serve after a delay
     else {
       setTimeout(() => {
-        this.ball.serve(!byPlayerOne);
+        this.serve();
       }, this.params.delayAfterPoint);
     }
   }

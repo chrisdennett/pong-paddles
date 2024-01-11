@@ -8,6 +8,7 @@ import { calculateFPS } from "./fps.js";
 const infoListElem = document.getElementById("infoList");
 
 const pongData = {
+  gameMode: "onePlayer",
   displayWidth: 800,
   delayAfterPoint: 1000,
   delayRestartAfterWin: 2000,
@@ -20,8 +21,8 @@ const pongData = {
   },
   ball: {
     colour: "#ffffff",
-    serveVx: 2,
-    serveVy: 3,
+    serveVx: 1,
+    serveVy: 1,
     vx: 3,
     vy: 4,
     width: 5.3,
@@ -31,7 +32,8 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 6,
+    speed: 3,
+    computerSpeed: 2,
   },
 };
 

@@ -21,8 +21,8 @@ body {
   margin: 0;
 }
 
-#pongSvg {
-  width: 800px;
+#svgPong {
+  max-height: 100vh;
 }
 
 #fpsCounter {
