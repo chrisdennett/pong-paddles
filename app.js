@@ -8,7 +8,7 @@ import { calculateFPS } from "./fps.js";
 const infoListElem = document.getElementById("infoList");
 
 const pongData = {
-  gameMode: "onePlayer",
+  gameMode: "demo",
   displayWidth: 800,
   delayAfterPoint: 1000,
   delayRestartAfterWin: 2000,

@@ -49,14 +49,23 @@ export class DataPong {
     if (this.gameMode === "demo") {
       this.paddleLeft.followBall(this.ball);
       this.paddleRight.followBall(this.ball);
-    } else if (this.gameMode === "onePlayer") {
+    } else {
       this.dataInputs.update();
       if (this.dataInputs.playerOne.up) {
         this.paddleLeft.moveUp();
       } else if (this.dataInputs.playerOne.down) {
         this.paddleLeft.moveDown();
       }
-      this.paddleRight.followBall(this.ball);
+
+      if (this.gameMode === "twoPlayer") {
+        if (this.dataInputs.playerTwo.up) {
+          this.paddleRight.moveUp();
+        } else if (this.dataInputs.playerTwo.down) {
+          this.paddleRight.moveDown();
+        }
+      } else {
+        this.paddleRight.followBall(this.ball);
+      }
     }
   }
 
