@@ -18,7 +18,6 @@ export class DataPong {
     this.paddleRight = new DataPaddle({ bounds, ...paddle, type: "right" });
     if (this.gameMode === "onePlayer") {
       this.paddleRight.speed = paddle.computerSpeed;
-      console.log("this.paddleRight.speed: ", this.paddleRight.speed);
     }
     this.dataInputs = new DataInputs({});
     this.serveLeft = false;
@@ -50,22 +49,34 @@ export class DataPong {
       this.paddleLeft.followBall(this.ball);
       this.paddleRight.followBall(this.ball);
     } else {
+      // set latest input values
       this.dataInputs.update();
-      if (this.dataInputs.playerOne.up) {
-        this.paddleLeft.moveUp();
-      } else if (this.dataInputs.playerOne.down) {
-        this.paddleLeft.moveDown();
-      }
 
+      // player one
+      this.updatePaddleWithUserInput(
+        this.paddleLeft,
+        this.dataInputs.playerOne
+      );
+
+      // player two
       if (this.gameMode === "twoPlayer") {
-        if (this.dataInputs.playerTwo.up) {
-          this.paddleRight.moveUp();
-        } else if (this.dataInputs.playerTwo.down) {
-          this.paddleRight.moveDown();
-        }
+        this.updatePaddleWithUserInput(
+          this.paddleRight,
+          this.dataInputs.playerTwo
+        );
       } else {
         this.paddleRight.followBall(this.ball);
       }
+    }
+  }
+
+  updatePaddleWithUserInput(paddle, input) {
+    if (input.up) {
+      paddle.moveUp();
+    }
+
+    if (input.down) {
+      paddle.moveDown();
     }
   }
 

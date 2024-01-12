@@ -4,10 +4,9 @@
 
 ## TODO
 
-- get the serve starting slowler than usual until hit for the first time.
 - stop the jerky motion
-- add sounds
 - have the simulated paddles hit the ball with different parts of the paddle. This may happen naturally if they are slowed down.
+- add sounds
 
 ## ideas
 
