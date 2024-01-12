@@ -31,6 +31,10 @@ export class DataPaddle {
   }
 
   followBall(ball) {
+    // set target y for the ball
+    // work out distance to ball
+    // if the distance is
+
     const paddleIsBelowBall = this.y >= ball.y;
     const paddleIsAboveBall = this.y + this.height < ball.y;
     const ballGoingLeft = ball.vx < 0;
@@ -46,7 +50,10 @@ export class DataPaddle {
     } else if (paddleIsAboveBall) {
       this.y += moveSpeed;
     } else {
-      this.y += Math.random() * 2;
+      // set target as middle of paddle
+      const targY = this.y + this.height / 2;
+      const dist = ball.y - targY;
+      this.y += dist;
     }
 
     this.restrictToBounds();
