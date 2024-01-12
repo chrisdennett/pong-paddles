@@ -11,7 +11,6 @@ export class DataBall {
 
   update() {
     this.x += this.vx;
-    this.x += this.vx;
     this.y += this.vy;
     this.restictToBounds();
   }
@@ -35,9 +34,16 @@ export class DataBall {
     this.vy = Math.random() < 0.5 ? this.params.serveVy : -this.params.serveVy;
   }
 
-  return() {
+  return(paddleOffset) {
+    // reverse x velocity
     this.vx = -this.vx;
+    // ramp up speed from initial serve vx to full speed
+    this.adjustXSpeed();
 
+    // alter vy based on paddle offset
+  }
+
+  adjustXSpeed() {
     const isNegative = this.vx < 1;
 
     if (Math.abs(this.vx) < this.params.vx) {
@@ -50,7 +56,7 @@ export class DataBall {
   }
 
   restictToBounds() {
-    if (this.y >= this.bounds.bottom - this.height) {
+    if (this.y > this.bounds.bottom - this.height) {
       this.y = this.bounds.bottom - this.height;
       this.vy = -this.vy;
     }
@@ -60,8 +66,8 @@ export class DataBall {
       this.vy = -this.vy;
     }
 
-    // only needed if want the ball to bound off the side walls
-    if (this.x >= this.bounds.right - this.width) {
+    // // only needed if want the ball to bound off the side walls
+    if (this.x > this.bounds.right - this.width) {
       this.x = this.bounds.right - this.width;
       this.vx = -this.vx;
     }

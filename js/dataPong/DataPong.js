@@ -124,25 +124,52 @@ export class DataPong {
     return isWinner;
   }
 
-  checkPointScored() {
-    if (this.ball.x <= this.paddleLeft.x + this.paddleLeft.width) {
-      const leftPaddleContact =
-        this.ball.y + this.ball.height >= this.paddleLeft.y &&
-        this.ball.y <= this.paddleLeft.y + this.paddleLeft.height;
+  checkInLeftPaddleHitZone() {
+    return this.ball.x <= this.paddleLeft.x + this.paddleLeft.width;
+  }
 
-      if (leftPaddleContact) {
-        this.ball.return();
+  checkInRightPaddleHitZone() {
+    return this.ball.x + this.ball.width >= this.paddleRight.x;
+  }
+
+  checkPaddleContact(paddle) {
+    const contactMinY = paddle.y - this.ball.height;
+    const contactMaxY = paddle.y + paddle.height;
+    const maxOffset = contactMaxY - contactMinY;
+    const contactMidY = paddle.y + contactMaxY - contactMinY;
+
+    const contact =
+      // below the top of the paddle
+      this.ball.y >= contactMinY &&
+      // above the bottom of the paddle
+      this.ball.y <= contactMaxY;
+
+    const offset = contactMidY - this.ball.y;
+
+    return { contact, offset };
+  }
+
+  checkPointScored() {
+    const inLeftPaddleHitZone = this.checkInLeftPaddleHitZone();
+    const inRightPaddleHitZone = this.checkInRightPaddleHitZone();
+
+    // LEFT PADDLE
+    if (inLeftPaddleHitZone) {
+      const { contact, offset } = this.checkPaddleContact(this.paddleLeft);
+
+      if (contact) {
+        this.ball.return(offset);
       } else {
         // missed by left paddle (player one)
         this.onPointScored(false);
       }
-    } else if (this.ball.x + this.ball.width >= this.paddleRight.x) {
-      const rightPaddleContact =
-        this.ball.y + this.ball.height >= this.paddleRight.y &&
-        this.ball.y <= this.paddleRight.y + this.paddleRight.height;
+    }
+    // RIGHT PADDLE
+    else if (inRightPaddleHitZone) {
+      const { contact, offset } = this.checkPaddleContact(this.paddleRight);
 
-      if (rightPaddleContact) {
-        this.ball.return();
+      if (contact) {
+        this.ball.return(offset);
       } else {
         // missed by right paddle (player two)
         this.onPointScored(true);

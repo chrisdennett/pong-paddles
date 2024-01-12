@@ -31,10 +31,6 @@ export class DataPaddle {
   }
 
   followBall(ball) {
-    // set target y for the ball
-    // work out distance to ball
-    // if the distance is
-
     const paddleIsBelowBall = this.y >= ball.y;
     const paddleIsAboveBall = this.y + this.height < ball.y;
     const ballGoingLeft = ball.vx < 0;
