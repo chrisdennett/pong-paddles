@@ -30,26 +30,43 @@ export class DataPaddle {
     this.restrictToBounds();
   }
 
-  followBall(ball) {
-    const paddleIsBelowBall = this.y >= ball.y;
-    const paddleIsAboveBall = this.y + this.height < ball.y;
-    const ballGoingLeft = ball.vx < 0;
+  getDistanceToBallAsFraction(ball) {
+    let distanceToBall = 0;
+    if (this.isLeft) {
+      distanceToBall = ball.x - this.params.bounds.left;
+    } else {
+      distanceToBall = this.params.bounds.right - ball.x;
+    }
 
-    // slow speed if not returning
+    distanceToBall -= this.width;
+    const maxDistance = this.params.bounds.right - this.params.bounds.left;
+
+    return 1 - distanceToBall / maxDistance;
+  }
+
+  followBall(ball) {
+    const distToBall = this.getDistanceToBallAsFraction(ball);
+
+    const paddleIsBelowBall = this.y > ball.y;
+    const paddleIsAboveBall = this.y + this.height <= ball.y;
+    const ballGoingLeft = ball.vx < 0;
     let isReturning =
       (this.isLeft && ballGoingLeft) || (!this.isLeft && !ballGoingLeft);
 
-    const moveSpeed = isReturning ? this.speed : Math.random() * 2;
+    // set based on proximaty
+    const maxSpeed = isReturning ? this.speed : this.speed / 4;
+    const computerSpeed = distToBall * maxSpeed;
 
     if (paddleIsBelowBall) {
-      this.y -= moveSpeed;
+      this.y -= computerSpeed;
     } else if (paddleIsAboveBall) {
-      this.y += moveSpeed;
+      this.y += computerSpeed;
     } else {
       // set target as middle of paddle
       const targY = this.y + this.height / 2;
       const dist = ball.y - targY;
-      this.y += dist;
+
+      this.y += dist <= computerSpeed ? dist : computerSpeed;
     }
 
     this.restrictToBounds();

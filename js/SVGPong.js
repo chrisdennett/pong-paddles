@@ -42,6 +42,8 @@ export class SVGPong {
   }
 
   draw() {
+    this.ballElem.style.fill = this.dataPong.ball.colour;
+
     if (this.dataPong.gameState === "gameOver") {
       this.showGameOverScreen();
     } else {

@@ -67,13 +67,13 @@ export class DataBall {
     }
 
     // // only needed if want the ball to bound off the side walls
-    if (this.x > this.bounds.right - this.width) {
-      this.x = this.bounds.right - this.width;
-      this.vx = -this.vx;
-    }
-    if (this.x < this.bounds.left) {
-      this.x = this.bounds.left;
-      this.vx = -this.vx;
-    }
+    // if (this.x > this.bounds.right - this.width) {
+    //   this.x = this.bounds.right - this.width;
+    //   this.vx = -this.vx;
+    // }
+    // if (this.x < this.bounds.left) {
+    //   this.x = this.bounds.left;
+    //   this.vx = -this.vx;
+    // }
   }
 }

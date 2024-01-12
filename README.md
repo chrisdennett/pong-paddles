@@ -4,7 +4,6 @@
 
 ## TODO
 
-- stop the jerky motion
 - have the simulated paddles hit the ball with different parts of the paddle. This may happen naturally if they are slowed down.
 - add sounds
 

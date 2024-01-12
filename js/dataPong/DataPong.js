@@ -5,6 +5,7 @@ import { DataPaddle } from "./DataPaddle.js";
 export class DataPong {
   constructor(params) {
     const { bounds, paddle, ball, winningScore, gameMode } = params;
+
     this.params = params;
     this.winningScore = winningScore; // set here for convenience
     // demo, onePlayer, twoPlayer,
