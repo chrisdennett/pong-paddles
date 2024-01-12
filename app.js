@@ -1,9 +1,9 @@
-import { DataPong } from "./DataPong.js";
-import { Info } from "./Info.js";
+import { DataPong } from "./js/dataPong/DataPong.js";
+import { Info } from "./js/Info.js";
 // import { Pong } from "./Pong.js";
-import { SVGPong } from "./SVGPong.js";
+import { SVGPong } from "./js/SVGPong.js";
 // import { PongTestArea } from "./PongTestArea.js";
-import { calculateFPS } from "./fps.js";
+import { calculateFPS } from "./js/fps.js";
 
 const infoListElem = document.getElementById("infoList");
 
