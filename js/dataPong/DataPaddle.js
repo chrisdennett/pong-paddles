@@ -52,7 +52,7 @@ export class DataPaddle {
 
     const hitHeight = this.height + ball.height;
     const hitY = this.y - ball.height;
-    this.targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
+    const targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
 
     const paddleIsBelowBall = this.y > ball.y + ball.height;
     const paddleIsAboveBall = this.y + this.height <= ball.y;
@@ -69,9 +69,9 @@ export class DataPaddle {
     } else if (paddleIsAboveBall) {
       this.y += computerSpeed;
     } else {
-      // set target as middle of paddle
-      const dist = ball.y - this.targetPaddleY;
-
+      // stops paddle jumping immediately when offset set.
+      const proximatyToBall = 1 - distToBall;
+      const dist = ball.y - (targetPaddleY + proximatyToBall);
       this.y += dist <= computerSpeed ? dist : computerSpeed;
     }
 

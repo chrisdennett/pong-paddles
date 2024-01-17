@@ -147,7 +147,9 @@ export class DataPong {
 
     const offset = contactMidY - this.ball.y;
 
-    console.log("offset: ", offset / maxOffset);
+    if (contact) {
+      console.log("offset: ", offset / maxOffset);
+    }
 
     return { contact, offset };
   }
