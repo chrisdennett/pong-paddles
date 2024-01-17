@@ -147,6 +147,8 @@ export class DataPong {
 
     const offset = contactMidY - this.ball.y;
 
+    console.log("offset: ", offset / maxOffset);
+
     return { contact, offset };
   }
 
@@ -160,6 +162,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
+        this.paddleRight.randomPaddleOffset = Math.random();
       } else {
         // missed by left paddle (player one)
         this.onPointScored(false);
@@ -171,6 +174,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
+        this.paddleLeft.randomPaddleOffset = Math.random();
       } else {
         // missed by right paddle (player two)
         this.onPointScored(true);

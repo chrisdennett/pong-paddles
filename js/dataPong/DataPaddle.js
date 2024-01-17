@@ -13,6 +13,7 @@ export class DataPaddle {
       top: params.bounds.top,
       bottom: params.bounds.bottom - params.height,
     };
+    this.randomPaddleOffset = 0.5;
     this.reset();
   }
 
@@ -44,10 +45,16 @@ export class DataPaddle {
     return 1 - distanceToBall / maxDistance;
   }
 
+  prepareToReceive() {}
+
   followBall(ball) {
     const distToBall = this.getDistanceToBallAsFraction(ball);
 
-    const paddleIsBelowBall = this.y > ball.y;
+    const hitHeight = this.height + ball.height;
+    const hitY = this.y - ball.height;
+    this.targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
+
+    const paddleIsBelowBall = this.y > ball.y + ball.height;
     const paddleIsAboveBall = this.y + this.height <= ball.y;
     const ballGoingLeft = ball.vx < 0;
     let isReturning =
@@ -63,8 +70,7 @@ export class DataPaddle {
       this.y += computerSpeed;
     } else {
       // set target as middle of paddle
-      const targY = this.y + this.height / 2;
-      const dist = ball.y - targY;
+      const dist = ball.y - this.targetPaddleY;
 
       this.y += dist <= computerSpeed ? dist : computerSpeed;
     }

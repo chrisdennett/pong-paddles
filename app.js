@@ -21,9 +21,9 @@ const pongData = {
   },
   ball: {
     colour: "#ffffff",
-    serveVx: 1,
-    serveVy: 1,
-    vx: 3,
+    serveVx: 3,
+    serveVy: 2,
+    vx: 6,
     width: 5.3,
     height: 5.3,
   },
@@ -31,8 +31,8 @@ const pongData = {
     colour: "#ffffff",
     width: 5.3,
     height: 21.2,
-    speed: 3,
-    computerSpeed: 3,
+    speed: 5,
+    computerSpeed: 5,
   },
 };
 
@@ -84,8 +84,8 @@ const pongData = {
 // const parentElement = document.getElementById("main");
 
 // const testArea = new PongTestArea(bounds, parentElement);
-const dataPong = new DataPong(pongData);
 // const pong = new Pong(params, parentElement);
+const dataPong = new DataPong(pongData);
 const svgPong = new SVGPong(dataPong);
 const info = new Info(dataPong, infoListElem);
 
@@ -94,11 +94,11 @@ dataPong.startGame();
 loop();
 
 function loop() {
-  dataPong.update();
   // pong.update();
+  //   testArea.update();
+  dataPong.update();
   info.update();
   svgPong.draw();
-  //   testArea.update();
 
   // Calculate and display FPS
   calculateFPS();
