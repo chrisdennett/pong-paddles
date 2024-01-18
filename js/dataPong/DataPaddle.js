@@ -6,6 +6,7 @@ export class DataPaddle {
     this.height = params.height;
     this.colour = params.colour;
     this.isLeft = params.type === "left";
+    this.y = this.params.bounds.bottom / 2;
     this.x = this.isLeft
       ? params.bounds.left
       : params.bounds.right - params.width;
@@ -13,8 +14,11 @@ export class DataPaddle {
       top: params.bounds.top,
       bottom: params.bounds.bottom - params.height,
     };
+    this.centerPt = {
+      x: this.x + this.width / 2,
+      y: this.y + this.height / 2,
+    };
     this.randomPaddleOffset = 0.5;
-    this.reset();
   }
 
   reset() {
@@ -24,17 +28,19 @@ export class DataPaddle {
   moveUp() {
     this.y -= this.speed;
     this.restrictToBounds();
+    this.updateCenterPt();
   }
 
   moveDown() {
     this.y += this.speed;
     this.restrictToBounds();
+    this.updateCenterPt();
   }
 
   getDistanceToBallAsFraction(ball) {
     let distanceToBall = 0;
     if (this.isLeft) {
-      distanceToBall = ball.x - this.params.bounds.left;
+      distanceToBall = ball.x - this.params.bounds.left + this.width;
     } else {
       distanceToBall = this.params.bounds.right - ball.x;
     }
@@ -45,17 +51,19 @@ export class DataPaddle {
     return 1 - distanceToBall / maxDistance;
   }
 
-  prepareToReceive() {}
+  updateCenterPt() {
+    this.centerPt.y = this.y + this.height / 2;
+  }
 
   followBall(ball) {
     const distToBall = this.getDistanceToBallAsFraction(ball);
 
-    const hitHeight = this.height + ball.height;
-    const hitY = this.y - ball.height;
+    const hitHeight = this.height + ball.size - 1;
+    const hitY = this.y - ball.size;
     const targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
 
-    const paddleIsBelowBall = this.y > ball.y + ball.height;
-    const paddleIsAboveBall = this.y + this.height <= ball.y;
+    const paddleIsBelowBall = this.y > ball.y + ball.size;
+    const paddleIsAboveBall = this.y + this.height < ball.y;
     const ballGoingLeft = ball.vx < 0;
     let isReturning =
       (this.isLeft && ballGoingLeft) || (!this.isLeft && !ballGoingLeft);
@@ -76,6 +84,7 @@ export class DataPaddle {
     }
 
     this.restrictToBounds();
+    this.updateCenterPt();
   }
 
   restrictToBounds() {

@@ -21,11 +21,10 @@ const pongData = {
   },
   ball: {
     colour: "#ffffff",
-    serveVx: 3,
-    serveVy: 2,
-    vx: 6,
-    width: 5.3,
-    height: 5.3,
+    serveVx: 1,
+    serveVy: 1,
+    vx: 3,
+    size: 5.3,
   },
   paddle: {
     colour: "#ffffff",

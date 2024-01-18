@@ -3,9 +3,9 @@ export class DataBall {
     this.params = params;
     this.colour = params.colour;
     this.bounds = params.bounds;
-    this.width = this.params.width;
-    this.height = this.params.height;
-    // sets this.  x, y, vx, vy
+    this.size = this.params.size;
+    this.radius = this.size / 2;
+    // sets this.  x, y, vx, vy, centerPt
     this.reset();
   }
 
@@ -13,13 +13,22 @@ export class DataBall {
     this.x += this.vx;
     this.y += this.vy;
     this.restictToBounds();
+    this.updateCenterPt();
+  }
+
+  updateCenterPt() {
+    this.centerPt = {
+      x: this.x + this.radius,
+      y: this.y + this.radius,
+    };
   }
 
   center() {
     const w = this.bounds.right - this.bounds.left;
     const h = this.bounds.bottom - this.bounds.top;
-    this.x = this.bounds.left + w / 2 - this.width / 2;
-    this.y = this.bounds.top + h / 2 - this.height / 2;
+    this.x = this.bounds.left + w / 2 - this.radius;
+    this.y = this.bounds.top + h / 2 - this.radius;
+    this.updateCenterPt();
   }
 
   reset() {
@@ -35,6 +44,27 @@ export class DataBall {
   }
 
   return(paddleOffset) {
+    /*
+    if the value is between 0 and 0.5 ball should go up
+    otherwise ball should go down.
+
+    0.0: vy = -max
+    0.5: vy = + or minus random
+    1.0: vy = +max
+    */
+    // console.log("paddleOffset: ", paddleOffset);
+
+    // const maxY = 5;
+    // if (paddleOffset < 0.5) {
+    //   // 0.5 the least power, 0 the most power
+
+    //   const powerOfHit = 0.5 - paddleOffset;
+    // }
+
+    // const maxY = this.params.vx;
+    // const newVy = paddleOffset < 0.5 ? 1 : -1;
+    // this.vy = newVy;
+
     // reverse x velocity
     this.vx = -this.vx;
     // ramp up speed from initial serve vx to full speed
@@ -56,8 +86,8 @@ export class DataBall {
   }
 
   restictToBounds() {
-    if (this.y > this.bounds.bottom - this.height) {
-      this.y = this.bounds.bottom - this.height;
+    if (this.y > this.bounds.bottom - this.size) {
+      this.y = this.bounds.bottom - this.size;
       this.vy = -this.vy;
     }
 

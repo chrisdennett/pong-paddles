@@ -130,11 +130,11 @@ export class DataPong {
   }
 
   checkInRightPaddleHitZone() {
-    return this.ball.x + this.ball.width >= this.paddleRight.x;
+    return this.ball.x + this.ball.size >= this.paddleRight.x;
   }
 
   checkPaddleContact(paddle) {
-    const contactMinY = paddle.y - this.ball.height;
+    const contactMinY = paddle.y - this.ball.size;
     const contactMaxY = paddle.y + paddle.height;
     const maxOffset = contactMaxY - contactMinY;
     const contactMidY = paddle.y + contactMaxY - contactMinY;
@@ -145,11 +145,10 @@ export class DataPong {
       // above the bottom of the paddle
       this.ball.y <= contactMaxY;
 
-    const offset = contactMidY - this.ball.y;
+    const diff = contactMidY - this.ball.y;
+    const offset = diff / maxOffset;
 
-    if (contact) {
-      console.log("offset: ", offset / maxOffset);
-    }
+    console.log("offset: ", offset);
 
     return { contact, offset };
   }
@@ -164,7 +163,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
-        this.paddleRight.randomPaddleOffset = Math.random();
+        // this.paddleRight.randomPaddleOffset = Math.random();
       } else {
         // missed by left paddle (player one)
         this.onPointScored(false);
@@ -176,7 +175,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
-        this.paddleLeft.randomPaddleOffset = Math.random();
+        // this.paddleLeft.randomPaddleOffset = Math.random();
       } else {
         // missed by right paddle (player two)
         this.onPointScored(true);
