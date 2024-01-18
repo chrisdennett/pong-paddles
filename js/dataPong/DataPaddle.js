@@ -58,7 +58,8 @@ export class DataPaddle {
   followBall(ball) {
     const distToBall = this.getDistanceToBallAsFraction(ball);
 
-    const hitHeight = this.height + ball.size - 1;
+    // -0.1 stops ball missing bottom of paddle if offset is 1.0
+    const hitHeight = this.height + ball.size - 0.1;
     const hitY = this.y - ball.size;
     const targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
 

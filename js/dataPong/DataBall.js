@@ -3,6 +3,7 @@ export class DataBall {
     this.params = params;
     this.colour = params.colour;
     this.bounds = params.bounds;
+    this.maxVy = params.maxVy;
     this.size = this.params.size;
     this.radius = this.size / 2;
     // sets this.  x, y, vx, vy, centerPt
@@ -44,26 +45,8 @@ export class DataBall {
   }
 
   return(paddleOffset) {
-    /*
-    if the value is between 0 and 0.5 ball should go up
-    otherwise ball should go down.
-
-    0.0: vy = -max
-    0.5: vy = + or minus random
-    1.0: vy = +max
-    */
-    // console.log("paddleOffset: ", paddleOffset);
-
-    // const maxY = 5;
-    // if (paddleOffset < 0.5) {
-    //   // 0.5 the least power, 0 the most power
-
-    //   const powerOfHit = 0.5 - paddleOffset;
-    // }
-
-    // const maxY = this.params.vx;
-    // const newVy = paddleOffset < 0.5 ? 1 : -1;
-    // this.vy = newVy;
+    // set y speed relative to distance from paddle center the ball strikes
+    this.vy = paddleOffset * this.maxVy;
 
     // reverse x velocity
     this.vx = -this.vx;

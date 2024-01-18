@@ -136,8 +136,6 @@ export class DataPong {
   checkPaddleContact(paddle) {
     const contactMinY = paddle.y - this.ball.size;
     const contactMaxY = paddle.y + paddle.height;
-    const maxOffset = contactMaxY - contactMinY;
-    const contactMidY = paddle.y + contactMaxY - contactMinY;
 
     const contact =
       // below the top of the paddle
@@ -145,12 +143,20 @@ export class DataPong {
       // above the bottom of the paddle
       this.ball.y <= contactMaxY;
 
-    const diff = contactMidY - this.ball.y;
-    const offset = diff / maxOffset;
+    let offsetAsFraction = null;
 
-    console.log("offset: ", offset);
+    if (contact) {
+      const strikeYRelaiveToPaddle = this.ball.centerPt.y - paddle.centerPt.y;
 
-    return { contact, offset };
+      // max offset for center pt of ball is the paddle height PLUS half
+      // the ball height (radius) at the top and at the bottom
+      const maxOffset = paddle.height / 2 + this.ball.radius;
+
+      // gives value between -1 and 1
+      offsetAsFraction = strikeYRelaiveToPaddle / maxOffset;
+    }
+
+    return { contact, offset: offsetAsFraction };
   }
 
   checkPointScored() {
@@ -163,7 +169,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
-        // this.paddleRight.randomPaddleOffset = Math.random();
+        this.paddleRight.randomPaddleOffset = Math.random();
       } else {
         // missed by left paddle (player one)
         this.onPointScored(false);
@@ -175,7 +181,7 @@ export class DataPong {
 
       if (contact) {
         this.ball.return(offset);
-        // this.paddleLeft.randomPaddleOffset = Math.random();
+        this.paddleLeft.randomPaddleOffset = Math.random();
       } else {
         // missed by right paddle (player two)
         this.onPointScored(true);
