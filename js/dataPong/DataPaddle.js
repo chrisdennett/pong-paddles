@@ -37,7 +37,7 @@ export class DataPaddle {
     this.updateCenterPt();
   }
 
-  getDistanceToBallAsFraction(ball) {
+  getXDistanceToBallAsFraction(ball) {
     let distanceToBall = 0;
     if (this.isLeft) {
       distanceToBall = ball.x - this.params.bounds.left + this.width;
@@ -56,33 +56,19 @@ export class DataPaddle {
   }
 
   followBall(ball) {
-    const distToBall = this.getDistanceToBallAsFraction(ball);
+    // amount of movement based on how near ball is to hitting paddle / scoring
+    const xDistToBall = this.getXDistanceToBallAsFraction(ball);
 
     // -0.1 stops ball missing bottom of paddle if offset is 1.0
     const hitHeight = this.height + ball.size - 0.1;
     const hitY = this.y - ball.size;
     const targetPaddleY = hitY + hitHeight * this.randomPaddleOffset;
+    const yDistToBall = ball.y - targetPaddleY;
 
-    const paddleIsBelowBall = this.y > ball.y + ball.size;
-    const paddleIsAboveBall = this.y + this.height < ball.y;
-    const ballGoingLeft = ball.vx < 0;
-    let isReturning =
-      (this.isLeft && ballGoingLeft) || (!this.isLeft && !ballGoingLeft);
+    // don't move by speed unless it would take it beyond target
+    const yMovementSize = yDistToBall < this.speed ? yDistToBall : this.speed;
 
-    // set based on proximaty
-    const maxSpeed = isReturning ? this.speed : this.speed / 4;
-    const computerSpeed = distToBall * maxSpeed;
-
-    if (paddleIsBelowBall) {
-      this.y -= computerSpeed;
-    } else if (paddleIsAboveBall) {
-      this.y += computerSpeed;
-    } else {
-      // stops paddle jumping immediately when offset set.
-      const proximatyToBall = 1 - distToBall;
-      const dist = ball.y - (targetPaddleY + proximatyToBall);
-      this.y += dist <= computerSpeed ? dist : computerSpeed;
-    }
+    this.y += yMovementSize * xDistToBall;
 
     this.restrictToBounds();
     this.updateCenterPt();
