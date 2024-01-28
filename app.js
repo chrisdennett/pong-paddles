@@ -1,8 +1,5 @@
 import { DataPong } from "./js/dataPong/DataPong.js";
 import { Info } from "./js/Info.js";
-// import { Pong } from "./Pong.js";
-import { SVGPong } from "./js/SVGPong.js";
-// import { PongTestArea } from "./PongTestArea.js";
 import { calculateFPS } from "./js/fps.js";
 
 const infoListElem = document.getElementById("infoList");
@@ -21,7 +18,7 @@ const pongData = {
   },
   ball: {
     colour: "#ffffff",
-    serveVx: 1,
+    serveVx: 3,
     serveVy: 1,
     vx: 5,
     maxVy: 3,
@@ -86,19 +83,27 @@ const pongData = {
 // const testArea = new PongTestArea(bounds, parentElement);
 // const pong = new Pong(params, parentElement);
 const dataPong = new DataPong(pongData);
-const svgPong = new SVGPong(dataPong);
+const dataPong2 = new DataPong(pongData);
 const info = new Info(dataPong, infoListElem);
 
+const pong1 = document.getElementById("pong1");
+const pong2 = document.getElementById("pong2");
+pong1.setup(dataPong);
+pong2.setup(dataPong2);
+
 dataPong.startGame();
+dataPong2.startGame();
 
 loop();
 
 function loop() {
   // pong.update();
-  //   testArea.update();
+  //  testArea.update();
   dataPong.update();
+  dataPong2.update();
   info.update();
-  svgPong.draw();
+  pong1.draw();
+  pong2.draw();
 
   // Calculate and display FPS
   calculateFPS();
