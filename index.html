@@ -5,9 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="js/PongGame.js"></script>
   </head>
   <body>
     <div id="fpsCounter"></div>
+    <pong-game>How is it going</pong-game>
 
     <main id="main">
       <svg id="svgPong" viewBox="0 0 278.7 219.5">
@@ -110,8 +112,9 @@
               d="M 138.5 147 v44"
             />
           </g>
-          <!-- <path
+          <path
             id="fullNet"
+            style="display: none"
             fill="#f0f"
             stroke="#fff"
             stroke-dasharray="3.7 3.7"
@@ -120,7 +123,7 @@
             stroke-linejoin="miter"
             stroke-width="5.3"
             d="M138.7 30.7v161.8"
-          /> -->
+          />
           <path
             id="leftBoundary"
             fill="#f0f"
