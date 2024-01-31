@@ -22,7 +22,7 @@ const pongData = {
     serveVy: 1,
     vx: 5,
     maxVy: 3,
-    size: 5,
+    size: 10,
   },
   paddle: {
     colour: "#ffffff",

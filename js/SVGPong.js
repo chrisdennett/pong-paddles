@@ -67,11 +67,34 @@ template.innerHTML = /*html*/ `
                     />
                     <stop id="stop6" offset="1" stop-color="#fff" stop-opacity=".1" />
                 </linearGradient>
+
+    
+                <linearGradient id="inlayGradient" gradientTransform="rotate(90)">
+                    <stop offset="0%" stop-color="rgba(0,0,0,0.5)" />
+                    <stop offset="10%" stop-color="rgba(0,0,0,0.2)" />
+                    <stop offset="90%" stop-color="rgba(0,0,0,0.2)" />
+                    <stop offset="100%" stop-color="rgba(0,0,0,0.5)" />
+                </linearGradient>
+
+                <filter
+                    style="color-interpolation-filters:sRGB"
+                    id="a"
+                    x="-0.06468828"
+                    y="-0.075397916"
+                    width="1.1293766"
+                    height="1.1507958">
+                    
+                    <feGaussianBlur id="blurFilter" stdDeviation="2.5"/>
+                    <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -10" />
+                </filter>
+
             </defs>
+
         <g id="game">
+
             <path
                 id="inlay"
-                fill="#000"
+                fill="url(#inlayGradient)"
                 stroke="none"
                 d="M28.3 7.7C40.5 6 79 0 140.3 0c68.3 0 91.5 3.5 108.7 6.2 17.3 2.8 23 10.6 25.5 22.2 1.7 8 4.5 45.7 4.2 87.4-.3 40-1.2 66.2-3.7 77.8-2.6 11.6-10.6 17.5-28.8 20-18.3 2.5-47.5 5.9-110 5.9s-95-5.5-107.4-6.7c-12.3-1.2-21.7-8.3-24.3-20.3C1.8 180.5 0 157 0 119s2-77.2 3.8-88.5A29 29 0 0 1 28.3 7.7Z"
             />
@@ -96,127 +119,140 @@ template.innerHTML = /*html*/ `
                 stroke="none"
                 d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"
             />
+            <g filter="url(#a)" >
+                <g id="net" style="display: none">
+                    <path
+                    id="netTop"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="3.7 3.7"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M 138.5 34 v55"
+                    />
+                    <path
+                    id="netMiddle"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="3.7 3.7"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M 138.5 89 v55"
+                    />
+                    <path
+                    id="netBottom"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="3.7 3.7"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M 138.5 147 v40"
+                    />
+                </g>
+                <path
+                    id="fullNet"
+                    style="display: inherit"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="3.7 3.7"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="5.3"
+                    d="M138.7 30.7v161.8"
+                />
+                <path
+                    id="leftBoundary"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="1.1"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M34.3 25.3v168.2"
+                />
+                <path
+                    id="rightBoundary"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="1.1"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M242.6 25.6v169.2"
+                />
+                <path
+                    id="topBoundary"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="5.3 4"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M238.1 26.8 H36.6"
+                />
+                <path
+                    id="bottomBoundary"
+                    fill="#f0f"
+                    stroke="#fff"
+                    stroke-dasharray="5.3 4"
+                    stroke-dashoffset="0"
+                    stroke-linecap="butt"
+                    stroke-linejoin="miter"
+                    stroke-width="6"
+                    d="M238.1 193.5 H36.6"
+                />
+                <text
+                    id="scoreLeft"
+                    x="88"
+                    y="65"
+                    fill="#f9f9f9"
+                    stroke="none"
+                    font-family="Poppins"
+                    font-size="39.2"
+                    font-weight="900"
+                    letter-spacing="2.5"
+                    text-anchor="middle"
+                >
+                    0
+                </text>
+                <text
+                    id="scoreRight"
+                    x="188"
+                    y="65"
+                    fill="#f9f9f9"
+                    stroke="none"
+                    font-family="Poppins"
+                    font-size="39.2"
+                    font-weight="900"
+                    letter-spacing="2.5"
+                    text-anchor="middle"
+                >
+                    0
+                </text>
 
-            <g id="net">
-                <path
-                id="netTop"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="3.7 3.7"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M 138.5 30.7 v55"
-                />
-                <path
-                id="netMiddle"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="3.7 3.7"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M 138.5 89 v55"
-                />
-                <path
-                id="netBottom"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="3.7 3.7"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M 138.5 147 v44"
-                />
+                <g id="svgBall">
+                    <path stroke="none" d="M0 0 h10 v10 h-10z" />
+                </g>
+
+                <g id="paddleLeft">
+                    <path stroke="none" d="M0 0 h5 v20 h-5z" />
+                </g>
+
+                <g id="paddleRight">
+                    <path stroke="none" d="M0 0 h5 v20 h-5z" />
+                </g>
             </g>
-            <path
-                id="fullNet"
-                style="display: none"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="3.7 3.7"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M138.7 30.7v161.8"
-            />
-            <path
-                id="leftBoundary"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="1.1"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M34.3 25.3v168.2"
-            />
-            <path
-                id="rightBoundary"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="1.1"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="5.3"
-                d="M242.6 25.6v169.2"
-            />
-            <path
-                id="topBoundary"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="5.3 4"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="2.6"
-                d="M238.1 26.8H36.6"
-            />
-            <path
-                id="bottomBoundary"
-                fill="#f0f"
-                stroke="#fff"
-                stroke-dasharray="5.3 4"
-                stroke-dashoffset="0"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-width="2.6"
-                d="M238.1 193.5H36.6"
-            />
-            <text
-                id="scoreLeft"
-                x="88"
-                y="65"
-                fill="#f9f9f9"
-                stroke="none"
-                font-family="Poppins"
-                font-size="39.2"
-                font-weight="900"
-                letter-spacing="2.5"
-                text-anchor="middle"
-            >
-                0
-            </text>
-            <text
-                id="scoreRight"
-                x="188"
-                y="65"
-                fill="#f9f9f9"
-                stroke="none"
-                font-family="Poppins"
-                font-size="39.2"
-                font-weight="900"
-                letter-spacing="2.5"
-                text-anchor="middle"
-            >
-                0
-            </text>
-
+       
             <g id="gameOverContent">
                 <text
                 id="gameOver"
@@ -247,19 +283,8 @@ template.innerHTML = /*html*/ `
                 PLAYER X WINS
                 </text>
             </g>
-
-            <g id="svgBall">
-                <path stroke="none" d="M0 0 h5 v5 h-5z" />
-            </g>
-
-            <g id="paddleLeft">
-                <path stroke="none" d="M0 0 h5 v20 h-5z" />
-            </g>
-
-            <g id="paddleRight">
-                <path stroke="none" d="M0 0 h5 v20 h-5z" />
-            </g>
-        </g>
+       
+        </g>   
     </svg>
     </div>
 `;
