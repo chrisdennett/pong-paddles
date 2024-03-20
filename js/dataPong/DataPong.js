@@ -4,9 +4,11 @@ import { DataPaddle } from "./DataPaddle.js";
 
 export class DataPong {
   constructor(params) {
-    const { bounds, paddle, ball, winningScore, gameMode, display } = params;
+    const { bounds, paddle, ball, winningScore, gameMode, display, palette } =
+      params;
 
     this.params = params;
+    this.palette = palette;
     this.showSides = display.showSides;
     this.winningScore = winningScore; // set here for convenience
     // demo, onePlayer, twoPlayer,

@@ -30,7 +30,7 @@ template.innerHTML = /*html*/ `
         <svg id="svgPong" viewBox="0 0 278.7 219.5">
             <defs id="defs1">
                 <mask id="screenMask">
-                    <path fill="white" d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"></path>
+                    <path fill="rgba(255,255,255,0.6)" d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"></path>
                 </mask>
             
                 <filter id="oldTVFilter">
@@ -92,13 +92,21 @@ template.innerHTML = /*html*/ `
 
         <g id="game">
 
+        <!-- OUTER BIT -->
             <path
                 id="inlay"
+                fill="#3783fa"
+                stroke="none"
+                d="M28.3 7.7C40.5 6 79 0 140.3 0c68.3 0 91.5 3.5 108.7 6.2 17.3 2.8 23 10.6 25.5 22.2 1.7 8 4.5 45.7 4.2 87.4-.3 40-1.2 66.2-3.7 77.8-2.6 11.6-10.6 17.5-28.8 20-18.3 2.5-47.5 5.9-110 5.9s-95-5.5-107.4-6.7c-12.3-1.2-21.7-8.3-24.3-20.3C1.8 180.5 0 157 0 119s2-77.2 3.8-88.5A29 29 0 0 1 28.3 7.7Z"
+            />
+            <path
+                id="inlayShadowOverlay"
                 fill="url(#inlayGradient)"
                 stroke="none"
                 d="M28.3 7.7C40.5 6 79 0 140.3 0c68.3 0 91.5 3.5 108.7 6.2 17.3 2.8 23 10.6 25.5 22.2 1.7 8 4.5 45.7 4.2 87.4-.3 40-1.2 66.2-3.7 77.8-2.6 11.6-10.6 17.5-28.8 20-18.3 2.5-47.5 5.9-110 5.9s-95-5.5-107.4-6.7c-12.3-1.2-21.7-8.3-24.3-20.3C1.8 180.5 0 157 0 119s2-77.2 3.8-88.5A29 29 0 0 1 28.3 7.7Z"
             />
-
+         
+            <!-- INNER SCREEN AREA -->
             <path
                 id="screen"
                 fill="#3584fb"
@@ -119,6 +127,8 @@ template.innerHTML = /*html*/ `
                 stroke="none"
                 d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"
             />
+
+            <!-- GAME ELEMENTS -->
             <g>
                 <g id="net" style="display: none">
                     <path
@@ -316,6 +326,10 @@ class SvgPong extends HTMLElement {
     // boundaries
     this.leftBoundary = shadow.getElementById("leftBoundary");
     this.rightBoundary = shadow.getElementById("rightBoundary");
+
+    // screen and inlay
+    this.inlay = shadow.getElementById("inlay");
+    this.screen = shadow.getElementById("screen");
   }
 
   setup(dataPong) {
@@ -345,6 +359,10 @@ class SvgPong extends HTMLElement {
     );
     // ball colour
     this.ballElem.style.fill = dataPong.ball.colour;
+
+    // screen colours
+    this.inlay.style.fill = dataPong.palette.inlay;
+    this.screen.style.fill = dataPong.palette.screen;
 
     // show / hide sides
     if (!this.dataPong.showSides) {

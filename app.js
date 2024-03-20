@@ -13,9 +13,9 @@ const pongData = {
   useGapBug: false,
   useScoreBasedPaddleSizes: false,
   palette: {
-    surround: "yellow",
-    inset: "blue",
-    screen: "red",
+    surround: "#3783fa",
+    inset: "#3783fa",
+    screen: "#3584fb",
     paddleLeft: "white",
     paddleRight: "white",
     ball: "white",
@@ -58,10 +58,13 @@ const pongData = {
   },
 };
 
-// const testArea = new PongTestArea(bounds, parentElement);
-// const pong = new Pong(params, parentElement);
+// pong 2 data alterations
+const pongData2 = structuredClone(pongData);
+pongData2.palette.screen = "red";
+pongData2.palette.inlay = "red";
+
 const dataPong = new DataPong(pongData);
-const dataPong2 = new DataPong(pongData);
+const dataPong2 = new DataPong(pongData2);
 const info = new Info(dataPong, infoListElem);
 
 const pong1 = document.getElementById("pong1");
