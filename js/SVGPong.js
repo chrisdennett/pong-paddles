@@ -76,7 +76,7 @@ template.innerHTML = /*html*/ `
                     <stop offset="100%" stop-color="rgba(0,0,0,0.5)" />
                 </linearGradient>
 
-                <filter
+                <!-- <filter
                     style="color-interpolation-filters:sRGB"
                     id="a"
                     x="-0.06468828"
@@ -86,7 +86,7 @@ template.innerHTML = /*html*/ `
                     
                     <feGaussianBlur id="blurFilter" stdDeviation="2.5"/>
                     <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -10" />
-                </filter>
+                </filter> -->
 
             </defs>
 
@@ -119,40 +119,40 @@ template.innerHTML = /*html*/ `
                 stroke="none"
                 d="M34.6 17.3c11.4-1.5 47.3-7 104.4-7 63.7 0 87.9 3 104 5.6 16 2.5 18.2 6.3 20.5 16.9 1.5 7.1 4.8 44.9 4.5 82.8-.3 36.4-1.5 60.8-3.9 71.4-2.3 10.5-4.6 14.5-21.6 16.8-17 2.3-49 6-107.3 6-58.2 0-85.3-4.3-100-6-14.8-1.7-18.5-5.8-21-16.7a373 373 0 0 1-5.3-68.6 835 835 0 0 1 4.6-85.8c1.7-10.3 9.7-14 21.1-15.4Z"
             />
-            <g filter="url(#a)" >
+            <g>
                 <g id="net" style="display: none">
                     <path
-                    id="netTop"
-                    fill="#f0f"
-                    stroke="#fff"
-                    stroke-dasharray="3.7 3.7"
-                    stroke-dashoffset="0"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                    stroke-width="6"
-                    d="M 138.5 34 v55"
+                        id="netTop"
+                        fill="#f0f"
+                        stroke="#fff"
+                        stroke-dasharray="3.7 3.7"
+                        stroke-dashoffset="0"
+                        stroke-linecap="butt"
+                        stroke-linejoin="miter"
+                        stroke-width="6"
+                        d="M 138.5 34 v55"
                     />
                     <path
-                    id="netMiddle"
-                    fill="#f0f"
-                    stroke="#fff"
-                    stroke-dasharray="3.7 3.7"
-                    stroke-dashoffset="0"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                    stroke-width="6"
-                    d="M 138.5 89 v55"
+                        id="netMiddle"
+                        fill="#f0f"
+                        stroke="#fff"
+                        stroke-dasharray="3.7 3.7"
+                        stroke-dashoffset="0"
+                        stroke-linecap="butt"
+                        stroke-linejoin="miter"
+                        stroke-width="6"
+                        d="M 138.5 89 v55"
                     />
                     <path
-                    id="netBottom"
-                    fill="#f0f"
-                    stroke="#fff"
-                    stroke-dasharray="3.7 3.7"
-                    stroke-dashoffset="0"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                    stroke-width="6"
-                    d="M 138.5 147 v40"
+                        id="netBottom"
+                        fill="#f0f"
+                        stroke="#fff"
+                        stroke-dasharray="3.7 3.7"
+                        stroke-dashoffset="0"
+                        stroke-linecap="butt"
+                        stroke-linejoin="miter"
+                        stroke-width="6"
+                        d="M 138.5 147 v40"
                     />
                 </g>
                 <path
@@ -175,8 +175,8 @@ template.innerHTML = /*html*/ `
                     stroke-dashoffset="0"
                     stroke-linecap="butt"
                     stroke-linejoin="miter"
-                    stroke-width="6"
-                    d="M34.3 25.3v168.2"
+                    stroke-width="5"
+                    d="M34.3 25.3v171"
                 />
                 <path
                     id="rightBoundary"
@@ -186,8 +186,8 @@ template.innerHTML = /*html*/ `
                     stroke-dashoffset="0"
                     stroke-linecap="butt"
                     stroke-linejoin="miter"
-                    stroke-width="6"
-                    d="M242.6 25.6v169.2"
+                    stroke-width="5"
+                    d="M242.6 25.6v171"
                 />
                 <path
                     id="topBoundary"
@@ -197,7 +197,7 @@ template.innerHTML = /*html*/ `
                     stroke-dashoffset="0"
                     stroke-linecap="butt"
                     stroke-linejoin="miter"
-                    stroke-width="6"
+                    stroke-width="3"
                     d="M238.1 26.8 H36.6"
                 />
                 <path
@@ -208,7 +208,7 @@ template.innerHTML = /*html*/ `
                     stroke-dashoffset="0"
                     stroke-linecap="butt"
                     stroke-linejoin="miter"
-                    stroke-width="6"
+                    stroke-width="3"
                     d="M238.1 193.5 H36.6"
                 />
                 <text
@@ -241,15 +241,15 @@ template.innerHTML = /*html*/ `
                 </text>
 
                 <g id="svgBall">
-                    <path stroke="none" d="M0 0 h10 v10 h-10z" />
+                    <path stroke="none" d="M0 0 h5 v5 h-5z" />
                 </g>
 
                 <g id="paddleLeft">
-                    <path stroke="none" d="M0 0 h5 v20 h-5z" />
+                    <path id="paddleLeftPath" stroke="none" d="M0 0 h5 v20 h-5z" />
                 </g>
 
                 <g id="paddleRight">
-                    <path stroke="none" d="M0 0 h5 v20 h-5z" />
+                    <path id="paddleRightPath"  stroke="none" d="M0 0 h5 v20 h-5z" />
                 </g>
             </g>
        
@@ -288,7 +288,6 @@ template.innerHTML = /*html*/ `
     </svg>
     </div>
 `;
-
 class SvgPong extends HTMLElement {
   constructor() {
     super();
@@ -309,6 +308,10 @@ class SvgPong extends HTMLElement {
     // game over content
     this.gameOverContent = shadow.getElementById("gameOverContent");
     this.gameOverWinnerText = shadow.getElementById("gameOverWinnerText");
+
+    // set paddle sizes
+    this.paddleLeftPath = shadow.getElementById("paddleLeftPath");
+    this.paddleLeftPath.d = "M0 0 h10 v20 h-10z";
   }
 
   setup(dataPong) {
