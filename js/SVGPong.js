@@ -241,7 +241,7 @@ template.innerHTML = /*html*/ `
                 </text>
 
                 <g id="svgBall">
-                    <path stroke="none" d="M0 0 h5 v5 h-5z" />
+                    <path id="ballPath" stroke="none" d="M0 0 h5 v5 h-5z" />
                 </g>
 
                 <g id="paddleLeft">
@@ -309,14 +309,30 @@ class SvgPong extends HTMLElement {
     this.gameOverContent = shadow.getElementById("gameOverContent");
     this.gameOverWinnerText = shadow.getElementById("gameOverWinnerText");
 
-    // set paddle sizes
+    // set paddle/ball sizes
     this.paddleLeftPath = shadow.getElementById("paddleLeftPath");
-    this.paddleLeftPath.d = "M0 0 h10 v20 h-10z";
+    this.paddleRightPath = shadow.getElementById("paddleRightPath");
+    this.ballPath = shadow.getElementById("ballPath");
   }
 
   setup(dataPong) {
     this.dataPong = dataPong;
     this.bounds = dataPong.bounds;
+
+    this.paddleLeftPath.setAttribute(
+      "d",
+      `M0 0 h${dataPong.paddleLeft.width} v${dataPong.paddleLeft.height} h-${dataPong.paddleLeft.width}z`
+    );
+
+    this.paddleRightPath.setAttribute(
+      "d",
+      `M0 0 h${dataPong.paddleRight.width} v${dataPong.paddleRight.height} h-${dataPong.paddleRight.width}z`
+    );
+
+    this.ballPath.setAttribute(
+      "d",
+      `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
+    );
 
     this.svg.style.width = `${dataPong.displayWidth}px`;
 
