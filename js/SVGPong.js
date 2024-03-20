@@ -261,7 +261,7 @@ template.innerHTML = /*html*/ `
                 fill="#f9f9f9"
                 stroke="none"
                 font-family="press_start_2pregular"
-                font-size="28"
+                font-size="22"
                 font-weight="900"
                 letter-spacing="2.5"
                 text-anchor="middle"
@@ -275,7 +275,7 @@ template.innerHTML = /*html*/ `
                 fill="#f9f9f9"
                 stroke="none"
                 font-family="press_start_2pregular"
-                font-size="14"
+                font-size="12"
                 font-weight="900"
                 letter-spacing="2.5"
                 text-anchor="middle"
@@ -299,7 +299,6 @@ class SvgPong extends HTMLElement {
     this.ballElem = shadow.getElementById("svgBall");
     this.leftPaddle = shadow.getElementById("paddleLeft");
     this.rightPaddle = shadow.getElementById("paddleRight");
-    this.netMiddle = shadow.getElementById("netMiddle");
 
     // score text
     this.scoreLeft = shadow.getElementById("scoreLeft");
@@ -313,49 +312,60 @@ class SvgPong extends HTMLElement {
     this.paddleLeftPath = shadow.getElementById("paddleLeftPath");
     this.paddleRightPath = shadow.getElementById("paddleRightPath");
     this.ballPath = shadow.getElementById("ballPath");
+
+    // boundaries
+    this.leftBoundary = shadow.getElementById("leftBoundary");
+    this.rightBoundary = shadow.getElementById("rightBoundary");
   }
 
   setup(dataPong) {
     this.dataPong = dataPong;
     this.bounds = dataPong.bounds;
 
+    // outer size
+    this.svg.style.width = `${dataPong.displayWidth}px`;
+
+    // paddle sizes
     this.paddleLeftPath.setAttribute(
       "d",
       `M0 0 h${dataPong.paddleLeft.width} v${dataPong.paddleLeft.height} h-${dataPong.paddleLeft.width}z`
     );
-
     this.paddleRightPath.setAttribute(
       "d",
       `M0 0 h${dataPong.paddleRight.width} v${dataPong.paddleRight.height} h-${dataPong.paddleRight.width}z`
     );
+    // paddle colours
+    this.leftPaddle.style.fill = dataPong.paddleLeft.colour;
+    this.rightPaddle.style.fill = dataPong.paddleRight.colour;
 
+    // ball size
     this.ballPath.setAttribute(
       "d",
       `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
     );
-
-    this.svg.style.width = `${dataPong.displayWidth}px`;
-
+    // ball colour
     this.ballElem.style.fill = dataPong.ball.colour;
 
-    this.leftPaddle.style.fill = dataPong.paddleLeft.colour;
-    this.rightPaddle.style.fill = dataPong.paddleRight.colour;
+    // show / hide sides
+    if (!this.dataPong.showSides) {
+      this.leftBoundary.style.display = "none";
+      this.rightBoundary.style.display = "none";
+    }
 
-    this.hideGameOverScreen();
+    // this.hideGameOverScreen();
+    this.showGameOverScreen();
   }
 
   showGameOverScreen() {
-    this.netMiddle.style.display = "none";
     this.gameOverContent.style.display = "inherit";
 
     const playerTwoWon = this.dataPong.winner === "p2";
-    const winText = `PLAYER ${playerTwoWon ? "TWO" : "ONE"} WINS`;
+    const winText = `PLAYER ${playerTwoWon ? "2" : "1"} WINS`;
 
     this.gameOverWinnerText.innerHTML = winText;
   }
 
   hideGameOverScreen() {
-    this.netMiddle.style.display = "inherit";
     this.gameOverContent.style.display = "none";
   }
 

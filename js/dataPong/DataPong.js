@@ -4,15 +4,16 @@ import { DataPaddle } from "./DataPaddle.js";
 
 export class DataPong {
   constructor(params) {
-    const { bounds, paddle, ball, winningScore, gameMode } = params;
+    const { bounds, paddle, ball, winningScore, gameMode, display } = params;
 
     this.params = params;
+    this.showSides = display.showSides;
     this.winningScore = winningScore; // set here for convenience
     // demo, onePlayer, twoPlayer,
     // demoDoubles, onePlayerDoubles, twoPlayerDoubles
     this.gameMode = gameMode;
     this.gameState = "playing"; // "playing", "gameOver", "menu"
-    this.winner = "";
+    this.winner = "p2";
     this.score = { p1: 0, p2: 0 };
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });

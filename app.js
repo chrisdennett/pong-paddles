@@ -30,7 +30,7 @@ const pongData = {
   },
   display: {
     showNet: true,
-    showSides: true,
+    showSides: false,
     useGooeyFilter: true,
     useTvFilter: true,
     fullCabinet: false,
@@ -72,7 +72,7 @@ pong2.setup(dataPong2);
 dataPong.startGame();
 dataPong2.startGame();
 
-loop();
+// loop();
 
 function loop() {
   // pong.update();
