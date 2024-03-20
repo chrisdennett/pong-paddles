@@ -13,7 +13,7 @@ export class DataPong {
     // demoDoubles, onePlayerDoubles, twoPlayerDoubles
     this.gameMode = gameMode;
     this.gameState = "playing"; // "playing", "gameOver", "menu"
-    this.winner = "p2";
+    this.winner = "NULL";
     this.score = { p1: 0, p2: 0 };
     this.ball = new DataBall({ bounds, ...ball });
     this.paddleLeft = new DataPaddle({ bounds, ...paddle, type: "left" });

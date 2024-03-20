@@ -249,7 +249,7 @@ template.innerHTML = /*html*/ `
                 </g>
 
                 <g id="paddleRight">
-                    <path id="paddleRightPath"  stroke="none" d="M0 0 h5 v20 h-5z" />
+                    <path id="paddleRightPath" stroke="none" d="M0 0 h5 v20 h-5z" />
                 </g>
             </g>
        
@@ -261,7 +261,7 @@ template.innerHTML = /*html*/ `
                 fill="#f9f9f9"
                 stroke="none"
                 font-family="press_start_2pregular"
-                font-size="22"
+                font-size="18"
                 font-weight="900"
                 letter-spacing="2.5"
                 text-anchor="middle"
@@ -275,7 +275,7 @@ template.innerHTML = /*html*/ `
                 fill="#f9f9f9"
                 stroke="none"
                 font-family="press_start_2pregular"
-                font-size="12"
+                font-size="10"
                 font-weight="900"
                 letter-spacing="2.5"
                 text-anchor="middle"

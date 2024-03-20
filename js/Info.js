@@ -3,27 +3,33 @@ export class Info {
     this.dataPong = dataPong;
     this.parentElem = parentElem;
 
-    this.ballX = this.addInfo("Ball x");
-    this.ballY = this.addInfo("Ball y");
-    this.ballSpeedX = this.addInfo("Ball speed x");
-    this.ballSpeedY = this.addInfo("Ball speed y");
-    this.paddleLeftY = this.addInfo("Left paddle y");
-    this.paddleRightY = this.addInfo("Right paddle y");
-    this.winningScore = this.addInfo("Score to win");
-    this.playerOneScore = this.addInfo("Player one score");
-    this.playerTwoScore = this.addInfo("Player two score");
-    this.gameState = this.addInfo("Game State");
-    this.gameMode = this.addInfo("Game Mode");
-    this.winner = this.addInfo("Winner");
+    this.ballX = this.addInfo("ball.x");
+    this.ballY = this.addInfo("ball.y");
+    this.ballSpeedX = this.addInfo("ball.speed.x");
+    this.ballSpeedY = this.addInfo("ball.speed.y");
+    this.paddleLeftY = this.addInfo("paddle.left.y");
+    this.paddleRightY = this.addInfo("paddle.right.y");
+    this.winningScore = this.addInfo("score-to-win");
+    this.playerOneScore = this.addInfo("player-one.score");
+    this.playerTwoScore = this.addInfo("player-two.score");
+    this.gameState = this.addInfo("game.state");
+    this.gameMode = this.addInfo("game.mode");
+    this.winner = this.addInfo("winner");
+    this.showSides = this.addInfo("display.show-sides");
   }
 
   addInfo(name) {
-    const p = document.createElement("p");
-    const span = document.createElement("span");
-    p.innerHTML = `${name}: `;
-    p.appendChild(span);
+    const div = document.createElement("div");
+    const label = document.createElement("div");
+    const span = document.createElement("div");
+    label.innerHTML = `${name}: `;
+    div.appendChild(label);
+    div.appendChild(span);
 
-    this.parentElem.appendChild(p);
+    div.style.display = "flex";
+    label.style.width = "320px";
+
+    this.parentElem.appendChild(div);
     return span;
   }
 
@@ -44,5 +50,6 @@ export class Info {
     this.gameMode.innerHTML = this.dataPong.gameMode;
 
     this.winner.innerHTML = this.dataPong.winner;
+    this.showSides.innerHTML = this.dataPong.showSides;
   }
 }

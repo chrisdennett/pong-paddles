@@ -72,7 +72,7 @@ pong2.setup(dataPong2);
 dataPong.startGame();
 dataPong2.startGame();
 
-// loop();
+loop();
 
 function loop() {
   // pong.update();
