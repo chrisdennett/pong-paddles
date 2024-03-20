@@ -28,6 +28,7 @@ export class Info {
 
     div.style.display = "flex";
     label.style.width = "320px";
+    span.style.width = "320px";
 
     this.parentElem.appendChild(div);
     return span;
