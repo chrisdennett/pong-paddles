@@ -20,6 +20,11 @@ body {
   font-style: normal;
 }
 
+#main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #infoList {
   padding: 30px;
   border: 10px solid rgba(0, 0, 0, 0.3);

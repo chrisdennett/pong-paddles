@@ -6,14 +6,14 @@ const infoListElem = document.getElementById("infoList");
 
 const pongData = {
   gameMode: "demo",
-  displayWidth: 800,
+  displayWidth: 350,
   delayAfterPoint: 1000,
   delayRestartAfterWin: 2000,
   winningScore: 11,
   useGapBug: false,
   useScoreBasedPaddleSizes: false,
   palette: {
-    surround: "#3783fa",
+    surround: "red",
     inset: "#3783fa",
     screen: "#3584fb",
     paddleLeft: "white",
@@ -24,13 +24,13 @@ const pongData = {
     boundaryRight: "white",
     boundaryTop: "white",
     boundaryBottom: "white",
-    scoreLeft: "white",
-    scoreRight: "white",
+    scoreLeft: "purple",
+    scoreRight: "yellow",
     text: "white",
   },
   display: {
-    showNet: true,
     showSides: false,
+    showNet: true,
     useGooeyFilter: true,
     useTvFilter: true,
     fullCabinet: false,
@@ -42,7 +42,6 @@ const pongData = {
     left: 37,
   },
   ball: {
-    colour: "#ffffff",
     serveVx: 3,
     serveVy: 1,
     vx: 5,
@@ -50,7 +49,6 @@ const pongData = {
     size: 5,
   },
   paddle: {
-    colour: "#ffffff",
     width: 5,
     height: 20,
     speed: 5,
@@ -58,33 +56,39 @@ const pongData = {
   },
 };
 
-// pong 2 data alterations
-const pongData2 = structuredClone(pongData);
-pongData2.palette.screen = "red";
-pongData2.palette.inlay = "red";
-
 const dataPong = new DataPong(pongData);
-const dataPong2 = new DataPong(pongData2);
 const info = new Info(dataPong, infoListElem);
 
-const pong1 = document.getElementById("pong1");
-const pong2 = document.getElementById("pong2");
-pong1.setup(dataPong);
-pong2.setup(dataPong2);
+const main = document.getElementById("main");
 
-dataPong.startGame();
-dataPong2.startGame();
+const totalPongs = 15;
+const pongGames = [];
+const hueStep = 360 / totalPongs;
+
+for (let i = 0; i < totalPongs; i++) {
+  const randomPongData = structuredClone(pongData);
+  const hue = hueStep * i;
+  randomPongData.palette.surround = `hsl(${hue}, 60%, 40%)`;
+  randomPongData.palette.screen = `hsl(${hue}, 60%, 40%)`;
+  randomPongData.palette.inlay = `hsl(${hue}, 50%, 50%)`;
+
+  const dataPong = new DataPong(randomPongData);
+  const pongGame = document.createElement("svg-pong");
+  main.appendChild(pongGame);
+  pongGame.setup(dataPong);
+  pongGames.push({ game: pongGame, data: dataPong });
+  dataPong.startGame();
+}
 
 loop();
 
 function loop() {
-  // pong.update();
-  //  testArea.update();
-  dataPong.update();
-  dataPong2.update();
+  for (let p of pongGames) {
+    p.data.update();
+    p.game.draw();
+  }
+
   info.update();
-  pong1.draw();
-  pong2.draw();
 
   // Calculate and display FPS
   calculateFPS();

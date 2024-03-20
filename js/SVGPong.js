@@ -1,8 +1,8 @@
 const template = document.createElement("template");
 template.innerHTML = /*html*/ `
     <style>
-        #svgPong {
-            max-height: 300px;
+        #surround{
+            padding: 5px;
         }
 
         #gradientOverlay {
@@ -26,7 +26,7 @@ template.innerHTML = /*html*/ `
             pointer-events: none;
         }
     </style>
-    <div>
+    <div id="surround">
         <svg id="svgPong" viewBox="0 0 278.7 219.5">
             <defs id="defs1">
                 <mask id="screenMask">
@@ -326,8 +326,11 @@ class SvgPong extends HTMLElement {
     // boundaries
     this.leftBoundary = shadow.getElementById("leftBoundary");
     this.rightBoundary = shadow.getElementById("rightBoundary");
+    this.topBoundary = shadow.getElementById("topBoundary");
+    this.bottomBoundary = shadow.getElementById("bottomBoundary");
 
-    // screen and inlay
+    // surround, screen and inlay
+    this.surround = shadow.getElementById("surround");
     this.inlay = shadow.getElementById("inlay");
     this.screen = shadow.getElementById("screen");
   }
@@ -337,7 +340,7 @@ class SvgPong extends HTMLElement {
     this.bounds = dataPong.bounds;
 
     // outer size
-    this.svg.style.width = `${dataPong.displayWidth}px`;
+    this.svg.setAttribute("width", `${dataPong.displayWidth}px`);
 
     // paddle sizes
     this.paddleLeftPath.setAttribute(
@@ -348,21 +351,12 @@ class SvgPong extends HTMLElement {
       "d",
       `M0 0 h${dataPong.paddleRight.width} v${dataPong.paddleRight.height} h-${dataPong.paddleRight.width}z`
     );
-    // paddle colours
-    this.leftPaddle.style.fill = dataPong.paddleLeft.colour;
-    this.rightPaddle.style.fill = dataPong.paddleRight.colour;
 
     // ball size
     this.ballPath.setAttribute(
       "d",
       `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
     );
-    // ball colour
-    this.ballElem.style.fill = dataPong.ball.colour;
-
-    // screen colours
-    this.inlay.style.fill = dataPong.palette.inlay;
-    this.screen.style.fill = dataPong.palette.screen;
 
     // show / hide sides
     if (!this.dataPong.showSides) {
@@ -370,8 +364,26 @@ class SvgPong extends HTMLElement {
       this.rightBoundary.style.display = "none";
     }
 
+    // boundary colours
+    this.leftBoundary.style.stroke = dataPong.palette.boundaryLeft;
+    this.rightBoundary.style.stroke = dataPong.palette.boundaryRight;
+    this.topBoundary.style.stroke = dataPong.palette.boundaryTop;
+    this.bottomBoundary.style.stroke = dataPong.palette.boundaryBottom;
+
+    // paddle colours
+    this.leftPaddle.style.fill = dataPong.palette.paddleLeft;
+    this.rightPaddle.style.fill = dataPong.palette.paddleRight;
+
+    // ball colour
+    this.ballElem.style.fill = dataPong.palette.ball;
+
+    // screen colours
+    this.inlay.style.fill = dataPong.palette.inlay;
+    this.screen.style.fill = dataPong.palette.screen;
+    this.surround.style.background = dataPong.palette.surround;
+
     // this.hideGameOverScreen();
-    this.showGameOverScreen();
+    // this.showGameOverScreen();
   }
 
   showGameOverScreen() {

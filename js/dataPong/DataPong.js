@@ -4,10 +4,19 @@ import { DataPaddle } from "./DataPaddle.js";
 
 export class DataPong {
   constructor(params) {
-    const { bounds, paddle, ball, winningScore, gameMode, display, palette } =
-      params;
+    const {
+      bounds,
+      paddle,
+      ball,
+      winningScore,
+      gameMode,
+      display,
+      displayWidth,
+      palette,
+    } = params;
 
     this.params = params;
+    this.displayWidth = displayWidth;
     this.palette = palette;
     this.showSides = display.showSides;
     this.winningScore = winningScore; // set here for convenience
@@ -99,7 +108,7 @@ export class DataPong {
     // game over - start new game after a delay
     if (gameOver) {
       setTimeout(() => {
-        this.startGame();
+        // this.startGame();
       }, this.params.delayRestartAfterWin);
     }
     // point over serve after a delay
