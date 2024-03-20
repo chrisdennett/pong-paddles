@@ -217,8 +217,8 @@ template.innerHTML = /*html*/ `
                     y="65"
                     fill="#f9f9f9"
                     stroke="none"
-                    font-family="Poppins"
-                    font-size="39.2"
+                    font-family="press_start_2pregular"
+                    font-size="32"
                     font-weight="900"
                     letter-spacing="2.5"
                     text-anchor="middle"
@@ -231,8 +231,8 @@ template.innerHTML = /*html*/ `
                     y="65"
                     fill="#f9f9f9"
                     stroke="none"
-                    font-family="Poppins"
-                    font-size="39.2"
+                    font-family="press_start_2pregular"
+                    font-size="32"
                     font-weight="900"
                     letter-spacing="2.5"
                     text-anchor="middle"
@@ -260,7 +260,7 @@ template.innerHTML = /*html*/ `
                 y="118"
                 fill="#f9f9f9"
                 stroke="none"
-                font-family="Poppins"
+                font-family="press_start_2pregular"
                 font-size="28"
                 font-weight="900"
                 letter-spacing="2.5"
@@ -274,7 +274,7 @@ template.innerHTML = /*html*/ `
                 y="132"
                 fill="#f9f9f9"
                 stroke="none"
-                font-family="Poppins"
+                font-family="press_start_2pregular"
                 font-size="14"
                 font-weight="900"
                 letter-spacing="2.5"
@@ -351,7 +351,7 @@ class SvgPong extends HTMLElement {
     const playerTwoWon = this.dataPong.winner === "p2";
     const winText = `PLAYER ${playerTwoWon ? "TWO" : "ONE"} WINS`;
 
-    gameOverWinnerText.innerHTML = winText;
+    this.gameOverWinnerText.innerHTML = winText;
   }
 
   hideGameOverScreen() {
