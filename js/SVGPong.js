@@ -3,6 +3,7 @@ template.innerHTML = /*html*/ `
     <style>
         #surround{
             padding: 5px;
+            display: inline-block;
         }
 
         #gradientOverlay {
