@@ -74,13 +74,14 @@ class PongTester extends HTMLElement {
   loop() {
     let p1Score = 0;
     let p2Score = 0;
-    this.sumScore.innerHTML = `SUM SCORE: ${p1Score} : ${p2Score} `;
 
     for (let p of this.pongGames) {
-      // p1Score += p.data.score.p1;
-      // p2Score += p.data.score.p2;
+      p1Score += p.score.p1;
+      p2Score += p.score.p2;
       p.loop();
     }
+
+    this.sumScore.innerHTML = `SUM SCORE: ${p1Score} : ${p2Score} `;
   }
 }
 
