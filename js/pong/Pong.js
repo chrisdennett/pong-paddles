@@ -1,4 +1,4 @@
-import { DataPong } from "../dataPong/DataPong.js";
+import { DataPong } from "./dataPong/DataPong.js";
 
 const PongTemplate = document.createElement("template");
 PongTemplate.innerHTML = /*html*/ `
