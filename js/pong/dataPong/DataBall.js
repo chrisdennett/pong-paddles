@@ -62,9 +62,12 @@ export class DataBall {
     this.vy = Math.random() < 0.5 ? this.params.serveVy : -this.params.serveVy;
   }
 
-  return(paddleOffset) {
+  return(paddleOffset, usePongPhysics = true) {
     // set y speed relative to distance from paddle center the ball strikes
-    this.vy = paddleOffset * this.maxVy;
+
+    if (usePongPhysics) {
+      this.vy = paddleOffset * this.maxVy;
+    }
 
     // reverse x velocity
     this.vx = -this.vx;

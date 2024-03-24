@@ -70,6 +70,9 @@ class PongPaddleTester extends HTMLElement {
       },
     };
 
+    this.totalBalls = 5;
+    this.usePongPhysics = true;
+
     this.svgPong = shadow.getElementById("svgPongTester");
   }
 
@@ -80,7 +83,6 @@ class PongPaddleTester extends HTMLElement {
     });
 
     // create a set of data balls
-    this.totalBalls = 5;
     this.testBalls = [];
     const hueOffset = 360 / this.totalBalls;
 
@@ -136,7 +138,7 @@ class PongPaddleTester extends HTMLElement {
       if (inHitZone) {
         const contactData = this.dataPong.checkPaddleContact(p, b);
         if (contactData.contact) {
-          b.return(contactData.offset);
+          b.return(contactData.offset, this.usePongPhysics);
         }
       }
 
