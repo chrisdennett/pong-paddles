@@ -5,16 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="./js/pong/SVGPong.js"></script>
+    <script type="module" src="./js/pong/SVGPong.js"></script>
     <script type="module" src="./js/pong/Pong.js"></script>
-    <script src="./js/pongTester/PongTester.js"></script>
+    <script type="module" src="./js/pongTester/SvgBall.js"></script>
+    <script type="module" src="./js/pongTester/PongPaddleTester.js"></script>
+    <script type="module" src="./js/pongTester/PongTester.js"></script>
+    <script type="module" src="./js/pongTester/SVGPongTester.js"></script>
   </head>
   <body>
     <div id="fpsCounter"></div>
 
     <main id="main">
-      <p-o-n-g id="pong"></p-o-n-g>
-      <pong-tester id="pongTester"></pong-tester>
+      <!-- <p-o-n-g id="pong"></p-o-n-g> -->
+      <pong-paddle-tester id="pongPaddleTester"></pong-paddle-tester>
+      <!-- <pong-tester id="pongTester"></pong-tester> -->
     </main>
 
     <script type="module" src="app.js"></script>

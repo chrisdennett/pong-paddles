@@ -4,9 +4,12 @@ export class DataPaddle {
     this.width = params.width;
     this.speed = params.speed;
     this.height = params.height;
+    this.halfHeight = this.height / 2;
     this.colour = params.colour;
     this.isLeft = params.type === "left";
     this.y = this.params.bounds.bottom / 2;
+    this.range = this.params.bounds.bottom - this.params.bounds.top;
+
     this.x = this.isLeft
       ? params.bounds.left
       : params.bounds.right - params.width;
@@ -19,10 +22,18 @@ export class DataPaddle {
       y: this.y + this.height / 2,
     };
     this.randomPaddleOffset = 0.5;
+
+    this.reset();
   }
 
   reset() {
     this.y = this.params.bounds.bottom / 2;
+  }
+
+  setY(y) {
+    this.y = this.bounds.top + y * this.range - this.halfHeight;
+    this.restrictToBounds();
+    this.updateCenterPt();
   }
 
   moveUp() {

@@ -1,21 +1,32 @@
-import { DataPong } from "./dataPong/DataPong.js";
+import { DataBall } from "../pong/dataPong/DataBall.js";
+import { DataPong } from "../pong/dataPong/DataPong.js";
 
-const PongTemplate = document.createElement("template");
-PongTemplate.innerHTML = /*html*/ `
+const PongPaddleTesterTemplate = document.createElement("template");
+PongPaddleTesterTemplate.innerHTML = /*html*/ `
     <style></style>
-    <svg-pong id="svgPong"></svg-pong>
+    <svg-pong-tester id="svgPongTester">
+      
+    </svg-pong-tester>
 `;
 
-class Pong extends HTMLElement {
+class PongPaddleTester extends HTMLElement {
   constructor() {
     super();
 
     const shadow = this.attachShadow({ mode: "open" });
-    shadow.append(PongTemplate.content.cloneNode(true));
+    shadow.append(PongPaddleTesterTemplate.content.cloneNode(true));
+
+    this.ballParams = {
+      serveVx: 3,
+      serveVy: 1,
+      vx: 5,
+      maxVy: 3,
+      size: 5,
+    };
 
     this.defaultGameSettings = {
       gameMode: "demo",
-      displayWidth: 350,
+      displayWidth: 800,
       delayAfterPoint: 1000,
       delayRestartAfterWin: 2000,
       winningScore: 11,
@@ -50,13 +61,7 @@ class Pong extends HTMLElement {
         bottom: 192,
         left: 37,
       },
-      ball: {
-        serveVx: 3,
-        serveVy: 1,
-        vx: 5,
-        maxVy: 3,
-        size: 5,
-      },
+      ball: this.ballParams,
       paddle: {
         width: 5,
         height: 20,
@@ -65,7 +70,7 @@ class Pong extends HTMLElement {
       },
     };
 
-    this.svgPong = shadow.getElementById("svgPong");
+    this.svgPong = shadow.getElementById("svgPongTester");
   }
 
   setup(customSettings) {
@@ -74,10 +79,37 @@ class Pong extends HTMLElement {
       ...customSettings,
     });
     this.svgPong.setup(this.dataPong);
+    this.svgPong.draw();
+
+    // create a set of data balls
+    const totalBalls = 4;
+    const testBalls = [];
+    for (let i = 0; i < totalBalls; i++) {
+      const dataBall = new DataBall({
+        ...this.ballParams,
+        bounds: this.dataPong.bounds,
+      });
+
+      dataBall.manuallySetBallPos(
+        this.dataPong.bounds.right,
+        this.dataPong.bounds.middleY
+      );
+
+      testBalls.push(dataBall);
+    }
+
+    this.svgPong.setupTestBalls(testBalls);
   }
 
   get score() {
     return this.dataPong.score;
+  }
+
+  setPaddleOneY(y) {
+    this.dataPong.paddleLeft.setY(y);
+  }
+  setPaddleTwoY(y) {
+    this.dataPong.paddleRight.setY(y);
   }
 
   start() {
@@ -89,6 +121,15 @@ class Pong extends HTMLElement {
     this.dataPong.update();
     this.svgPong.draw();
   }
+
+  //  GETTERS
+  get state() {
+    return this.dataPong.gameState;
+  }
+
+  get score() {
+    return this.dataPong.score;
+  }
 }
 
-customElements.define("p-o-n-g", Pong);
+customElements.define("pong-paddle-tester", PongPaddleTester);

@@ -25,10 +25,14 @@ export class DataBall {
   }
 
   center() {
-    const w = this.bounds.right - this.bounds.left;
-    const h = this.bounds.bottom - this.bounds.top;
-    this.x = this.bounds.left + w / 2 - this.radius;
-    this.y = this.bounds.top + h / 2 - this.radius;
+    this.x = this.bounds.middleX - this.radius;
+    this.y = this.bounds.middleY - this.radius;
+    this.updateCenterPt();
+  }
+
+  manuallySetBallPos(x, y) {
+    this.x = x - this.radius;
+    this.y = y - this.radius;
     this.updateCenterPt();
   }
 

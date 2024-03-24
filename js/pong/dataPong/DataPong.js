@@ -16,6 +16,13 @@ export class DataPong {
     } = params;
 
     this.params = params;
+
+    this.bounds = bounds;
+    this.bounds.width = bounds.right - bounds.left;
+    this.bounds.height = bounds.bottom - bounds.top;
+    this.bounds.middleX = bounds.left + this.bounds.width / 2;
+    this.bounds.middleY = bounds.top + this.bounds.height / 2;
+
     this.displayWidth = displayWidth;
     this.palette = palette;
     this.showSides = display.showSides;
@@ -33,7 +40,6 @@ export class DataPong {
       this.paddleRight.speed = paddle.computerSpeed;
     }
     this.dataInputs = new DataInputs({});
-    this.serveLeft = false;
   }
 
   startGame() {

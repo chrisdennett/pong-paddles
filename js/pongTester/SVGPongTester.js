@@ -1,5 +1,5 @@
-const template = document.createElement("template");
-template.innerHTML = /*html*/ `
+const svgPongTesterTemplate = document.createElement("template");
+svgPongTesterTemplate.innerHTML = /*html*/ `
     <style>
         #surround{
             padding: 5px;
@@ -251,9 +251,7 @@ template.innerHTML = /*html*/ `
                     0
                 </text>
 
-                <g id="svgBall">
-                    <path id="ballPath" stroke="none" d="M0 0 h5 v5 h-5z" />
-                </g>
+                <g id="ballGroup"></g>
 
                 <g id="paddleLeft">
                     <path id="paddleLeftPath" stroke="none" d="M0 0 h5 v20 h-5z" />
@@ -299,15 +297,15 @@ template.innerHTML = /*html*/ `
     </svg>
     </div>
 `;
-class SvgPong extends HTMLElement {
+class SvgPongTester extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: "open" });
-    shadow.append(template.content.cloneNode(true));
+    shadow.append(svgPongTesterTemplate.content.cloneNode(true));
 
     this.svg = shadow.getElementById("svgPong");
     // game elements
-    this.ballElem = shadow.getElementById("svgBall");
+
     this.leftPaddle = shadow.getElementById("paddleLeft");
     this.rightPaddle = shadow.getElementById("paddleRight");
 
@@ -322,7 +320,7 @@ class SvgPong extends HTMLElement {
     // set paddle/ball sizes
     this.paddleLeftPath = shadow.getElementById("paddleLeftPath");
     this.paddleRightPath = shadow.getElementById("paddleRightPath");
-    this.ballPath = shadow.getElementById("ballPath");
+    this.ball1Path = shadow.getElementById("ballPath1");
 
     // boundaries
     this.leftBoundary = shadow.getElementById("leftBoundary");
@@ -334,6 +332,36 @@ class SvgPong extends HTMLElement {
     this.surround = shadow.getElementById("surround");
     this.inlay = shadow.getElementById("inlay");
     this.screen = shadow.getElementById("screen");
+
+    this.ballGroup = shadow.getElementById("ballGroup");
+  }
+
+  setupTestBalls(dataBalls) {
+    this.allBalls = [];
+
+    for (let dBall of dataBalls) {
+      const ball = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const ballPath = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      ballPath.setAttribute("d", "M0 0 h5 v5 h-5z");
+      ballPath.setAttribute("fill", "red");
+      ballPath.setAttribute("stroke", "none");
+
+      this.positionElement(ball, dBall.x, dBall.y);
+
+      ball.appendChild(ballPath);
+      this.ballGroup.appendChild(ball);
+    }
+
+    // create ball elements and create an array
+  }
+
+  setBallPositions(x, y) {
+    for (let b of this.allBalls) {
+      this.positionElement(b, x, y);
+    }
   }
 
   setup(dataPong) {
@@ -354,10 +382,10 @@ class SvgPong extends HTMLElement {
     );
 
     // ball size
-    this.ballPath.setAttribute(
-      "d",
-      `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
-    );
+    // this.ball1Path.setAttribute(
+    //   "d",
+    //   `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
+    // );
 
     // show / hide sides
     if (!this.dataPong.showSides) {
@@ -374,14 +402,17 @@ class SvgPong extends HTMLElement {
     // paddle colours
     this.leftPaddle.style.fill = dataPong.palette.paddleLeft;
     this.rightPaddle.style.fill = dataPong.palette.paddleRight;
-
-    // ball colour
-    this.ballElem.style.fill = dataPong.palette.ball;
+    // hide the right paddle for testing
+    this.rightPaddle.style.display = "none";
 
     // screen colours
     this.inlay.style.fill = dataPong.palette.inlay;
     this.screen.style.fill = dataPong.palette.screen;
     this.surround.style.background = dataPong.palette.surround;
+
+    // ball colour
+    // this.ball1.style.fill = dataPong.palette.ball;
+    // this.positionElement(this.ball2, this.rightBoundary, this.topBoundary);
 
     this.hideGameOverScreen();
   }
@@ -400,34 +431,12 @@ class SvgPong extends HTMLElement {
   }
 
   draw() {
-    this.ballElem.style.fill = this.dataPong.ball.colour;
-
-    if (this.dataPong.gameState === "gameOver") {
-      this.showGameOverScreen();
-    } else {
-      this.hideGameOverScreen();
-    }
-
-    if (this.dataPong.gameState === "playing") {
-      this.positionElement(
-        this.ballElem,
-        this.dataPong.ball.x,
-        this.dataPong.ball.y
-      );
-      this.positionElement(
-        this.leftPaddle,
-        this.dataPong.paddleLeft.x,
-        this.dataPong.paddleLeft.y
-      );
-      this.positionElement(
-        this.rightPaddle,
-        this.dataPong.paddleRight.x,
-        this.dataPong.paddleRight.y
-      );
-    }
-
-    this.scoreLeft.innerHTML = this.dataPong.score.p1;
-    this.scoreRight.innerHTML = this.dataPong.score.p2;
+    // this.ball1.style.fill = this.dataPong.ball.colour;
+    // this.positionElement(
+    //   this.ball1,
+    //   this.dataPong.ball.x,
+    //   this.dataPong.ball.y
+    // );
   }
 
   positionElement(element, x, y) {
@@ -435,4 +444,4 @@ class SvgPong extends HTMLElement {
   }
 }
 
-customElements.define("svg-pong", SvgPong);
+customElements.define("svg-pong-tester", SvgPongTester);
