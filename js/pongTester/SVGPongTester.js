@@ -346,7 +346,7 @@ class SvgPongTester extends HTMLElement {
         "path"
       );
       ballPath.setAttribute("d", "M0 0 h5 v5 h-5z");
-      ballPath.setAttribute("fill", "red");
+      ballPath.setAttribute("fill", dBall.colour);
       ballPath.setAttribute("stroke", "none");
 
       this.positionElement(ball, dBall.x, dBall.y);
@@ -381,7 +381,7 @@ class SvgPongTester extends HTMLElement {
 
     // ball size
     for (let b of this.allBalls) {
-      b.path.style.fill = dataPong.palette.ball;
+      b.path.style.fill = b.colour;
       b.path.setAttribute(
         "d",
         `M0 0 h${b.data.size} v${b.data.size} h-${b.data.size}z`
@@ -429,7 +429,7 @@ class SvgPongTester extends HTMLElement {
 
   draw() {
     for (let b of this.allBalls) {
-      b.group.style.fill = this.dataPong.ball.colour;
+      b.path.style.fill = b.colour;
       this.positionElement(b.group, b.data.x, b.data.y);
     }
 

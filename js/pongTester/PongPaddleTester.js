@@ -80,19 +80,22 @@ class PongPaddleTester extends HTMLElement {
     });
 
     // create a set of data balls
-    this.totalBalls = 3;
+    this.totalBalls = 5;
     this.testBalls = [];
+    const hueOffset = 360 / this.totalBalls;
 
     for (let i = 0; i < this.totalBalls; i++) {
       const dataBall = new DataBall({
         ...this.ballParams,
         bounds: this.dataPong.bounds,
       });
+      dataBall.colour = `hsl(${hueOffset * i}, 60%, 50%)`;
       dataBall.index = i;
       this.testBalls.push(dataBall);
     }
 
     this.resetBalls();
+
     this.svgPong.setup(this.dataPong, this.testBalls);
     this.svgPong.draw();
   }
@@ -113,15 +116,14 @@ class PongPaddleTester extends HTMLElement {
     const range = maxY - minY;
     const ballOffset = range / (this.totalBalls - 1);
 
-    const midY = minY + range / 2;
+    // const midY = minY + range / 2;
 
     dataBall.manuallySetBallPos(
       this.dataPong.bounds.right,
-      // midY
       minY + dataBall.index * ballOffset
     );
 
-    dataBall.aimBallAtPaddle(this.dataPong.paddleLeft);
+    dataBall.aimBallAtPaddle(this.dataPong.paddleLeft, false);
   }
 
   loop() {

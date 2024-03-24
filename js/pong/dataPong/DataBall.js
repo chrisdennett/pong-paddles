@@ -37,8 +37,12 @@ export class DataBall {
   }
 
   // for testing purposes
-  aimBallAtPaddle(paddle) {
-    this.vx = -3;
+  aimBallAtPaddle(paddle, randomise) {
+    if (randomise) {
+      this.vx = -(1 + Math.random() * this.maxVy);
+    } else {
+      this.vx = -this.maxVy;
+    }
     this.vy = 0;
   }
 
