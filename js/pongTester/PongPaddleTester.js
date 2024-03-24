@@ -80,56 +80,70 @@ class PongPaddleTester extends HTMLElement {
     });
 
     // create a set of data balls
-    const totalBalls = 4;
-    const testBalls = [];
-    for (let i = 0; i < totalBalls; i++) {
+    this.totalBalls = 3;
+    this.testBalls = [];
+
+    for (let i = 0; i < this.totalBalls; i++) {
       const dataBall = new DataBall({
         ...this.ballParams,
         bounds: this.dataPong.bounds,
       });
-
-      dataBall.manuallySetBallPos(
-        this.dataPong.bounds.right,
-        this.dataPong.bounds.middleY
-      );
-
-      testBalls.push(dataBall);
+      dataBall.index = i;
+      this.testBalls.push(dataBall);
     }
 
-    // this.svgPong.setupTestBalls(testBalls);
-
-    this.svgPong.setup(this.dataPong, testBalls);
+    this.resetBalls();
+    this.svgPong.setup(this.dataPong, this.testBalls);
     this.svgPong.draw();
   }
 
-  get score() {
-    return this.dataPong.score;
+  resetBalls() {
+    for (let dataBall of this.testBalls) {
+      this.resetBall(dataBall);
+    }
   }
 
-  setPaddleOneY(y) {
-    this.dataPong.paddleLeft.setY(y);
-  }
-  setPaddleTwoY(y) {
-    this.dataPong.paddleRight.setY(y);
-  }
+  resetBall(dataBall) {
+    const minY = this.dataPong.paddleLeft.y - dataBall.radius;
+    const maxY =
+      this.dataPong.paddleLeft.y +
+      this.dataPong.paddleLeft.height +
+      dataBall.radius;
 
-  start() {
-    this.dataPong.startGame();
-    this.svgPong.draw();
+    const range = maxY - minY;
+    const ballOffset = range / (this.totalBalls - 1);
+
+    const midY = minY + range / 2;
+
+    dataBall.manuallySetBallPos(
+      this.dataPong.bounds.right,
+      // midY
+      minY + dataBall.index * ballOffset
+    );
+
+    dataBall.aimBallAtPaddle(this.dataPong.paddleLeft);
   }
 
   loop() {
-    this.dataPong.update();
+    const p = this.dataPong.paddleLeft;
+    // const b = this.testBalls[0];
+    for (let b of this.testBalls) {
+      b.update();
+      const inHitZone = this.dataPong.checkIfBallIsInPaddleHitZone(p, b);
+
+      if (inHitZone) {
+        const contactData = this.dataPong.checkPaddleContact(p, b);
+        if (contactData.contact) {
+          b.return(contactData.offset);
+        }
+      }
+
+      if (b.x > this.dataPong.bounds.right) {
+        this.resetBall(b);
+      }
+    }
+
     this.svgPong.draw();
-  }
-
-  //  GETTERS
-  get state() {
-    return this.dataPong.gameState;
-  }
-
-  get score() {
-    return this.dataPong.score;
   }
 }
 

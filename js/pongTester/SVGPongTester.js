@@ -432,6 +432,12 @@ class SvgPongTester extends HTMLElement {
       b.group.style.fill = this.dataPong.ball.colour;
       this.positionElement(b.group, b.data.x, b.data.y);
     }
+
+    this.positionElement(
+      this.leftPaddle,
+      this.dataPong.paddleLeft.x,
+      this.dataPong.paddleLeft.y
+    );
   }
 
   positionElement(element, x, y) {

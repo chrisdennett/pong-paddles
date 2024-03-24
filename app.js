@@ -43,6 +43,10 @@ function loop() {
     pongTester.loop();
   }
 
+  if (mode === "pongPaddleTester") {
+    pongPaddleTester.loop();
+  }
+
   // Calculate and display FPS
   calculateFPS();
 

@@ -143,6 +143,11 @@ export class DataPong {
     return isWinner;
   }
 
+  // for testing purposes - assumes left paddle
+  checkIfBallIsInPaddleHitZone(paddle, ball) {
+    return ball.x <= paddle.x + paddle.width;
+  }
+
   checkInLeftPaddleHitZone() {
     return this.ball.x <= this.paddleLeft.x + this.paddleLeft.width;
   }
@@ -151,24 +156,25 @@ export class DataPong {
     return this.ball.x + this.ball.size >= this.paddleRight.x;
   }
 
-  checkPaddleContact(paddle) {
-    const contactMinY = paddle.y - this.ball.size;
+  checkPaddleContact(paddle, ball) {
+    const contactMinY = paddle.y - ball.size;
     const contactMaxY = paddle.y + paddle.height;
 
     const contact =
       // below the top of the paddle
-      this.ball.y >= contactMinY &&
+      ball.y >= contactMinY &&
       // above the bottom of the paddle
-      this.ball.y <= contactMaxY;
+      ball.y <= contactMaxY;
 
     let offsetAsFraction = null;
 
     if (contact) {
-      const strikeYRelaiveToPaddle = this.ball.centerPt.y - paddle.centerPt.y;
+      const strikeYRelaiveToPaddle = ball.centerPt.y - paddle.centerPt.y;
 
       // max offset for center pt of ball is the paddle height PLUS half
       // the ball height (radius) at the top and at the bottom
-      const maxOffset = paddle.height / 2 + this.ball.radius;
+      const halfPaddleHeight = paddle.height / 2;
+      const maxOffset = halfPaddleHeight + ball.radius;
 
       // gives value between -1 and 1
       offsetAsFraction = strikeYRelaiveToPaddle / maxOffset;
@@ -183,7 +189,10 @@ export class DataPong {
 
     // LEFT PADDLE
     if (inLeftPaddleHitZone) {
-      const { contact, offset } = this.checkPaddleContact(this.paddleLeft);
+      const { contact, offset } = this.checkPaddleContact(
+        this.paddleLeft,
+        this.ball
+      );
 
       if (contact) {
         this.ball.return(offset);
@@ -195,7 +204,10 @@ export class DataPong {
     }
     // RIGHT PADDLE
     else if (inRightPaddleHitZone) {
-      const { contact, offset } = this.checkPaddleContact(this.paddleRight);
+      const { contact, offset } = this.checkPaddleContact(
+        this.paddleRight,
+        this.ball
+      );
 
       if (contact) {
         this.ball.return(offset);

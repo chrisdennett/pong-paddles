@@ -36,6 +36,12 @@ export class DataBall {
     this.updateCenterPt();
   }
 
+  // for testing purposes
+  aimBallAtPaddle(paddle) {
+    this.vx = -3;
+    this.vy = 0;
+  }
+
   reset() {
     this.center();
     this.vx = 0;
@@ -44,6 +50,10 @@ export class DataBall {
 
   serve(toLeft) {
     this.center();
+    this.setVelocity(toLeft);
+  }
+
+  setVelocity(toLeft) {
     this.vx = toLeft ? -this.params.serveVx : this.params.serveVx;
     this.vy = Math.random() < 0.5 ? this.params.serveVy : -this.params.serveVy;
   }
