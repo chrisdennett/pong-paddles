@@ -78,8 +78,6 @@ class PongPaddleTester extends HTMLElement {
       ...this.defaultGameSettings,
       ...customSettings,
     });
-    this.svgPong.setup(this.dataPong);
-    this.svgPong.draw();
 
     // create a set of data balls
     const totalBalls = 4;
@@ -98,7 +96,10 @@ class PongPaddleTester extends HTMLElement {
       testBalls.push(dataBall);
     }
 
-    this.svgPong.setupTestBalls(testBalls);
+    // this.svgPong.setupTestBalls(testBalls);
+
+    this.svgPong.setup(this.dataPong, testBalls);
+    this.svgPong.draw();
   }
 
   get score() {

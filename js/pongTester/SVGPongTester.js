@@ -353,18 +353,16 @@ class SvgPongTester extends HTMLElement {
 
       ball.appendChild(ballPath);
       this.ballGroup.appendChild(ball);
+
+      this.allBalls.push({ group: ball, path: ballPath, data: dBall });
     }
 
     // create ball elements and create an array
   }
 
-  setBallPositions(x, y) {
-    for (let b of this.allBalls) {
-      this.positionElement(b, x, y);
-    }
-  }
+  setup(dataPong, testBalls) {
+    this.setupTestBalls(testBalls);
 
-  setup(dataPong) {
     this.dataPong = dataPong;
     this.bounds = dataPong.bounds;
 
@@ -382,10 +380,13 @@ class SvgPongTester extends HTMLElement {
     );
 
     // ball size
-    // this.ball1Path.setAttribute(
-    //   "d",
-    //   `M0 0 h${dataPong.ball.size} v${dataPong.ball.size} h-${dataPong.ball.size}z`
-    // );
+    for (let b of this.allBalls) {
+      b.path.style.fill = dataPong.palette.ball;
+      b.path.setAttribute(
+        "d",
+        `M0 0 h${b.data.size} v${b.data.size} h-${b.data.size}z`
+      );
+    }
 
     // show / hide sides
     if (!this.dataPong.showSides) {
@@ -410,10 +411,6 @@ class SvgPongTester extends HTMLElement {
     this.screen.style.fill = dataPong.palette.screen;
     this.surround.style.background = dataPong.palette.surround;
 
-    // ball colour
-    // this.ball1.style.fill = dataPong.palette.ball;
-    // this.positionElement(this.ball2, this.rightBoundary, this.topBoundary);
-
     this.hideGameOverScreen();
   }
 
@@ -431,12 +428,10 @@ class SvgPongTester extends HTMLElement {
   }
 
   draw() {
-    // this.ball1.style.fill = this.dataPong.ball.colour;
-    // this.positionElement(
-    //   this.ball1,
-    //   this.dataPong.ball.x,
-    //   this.dataPong.ball.y
-    // );
+    for (let b of this.allBalls) {
+      b.group.style.fill = this.dataPong.ball.colour;
+      this.positionElement(b.group, b.data.x, b.data.y);
+    }
   }
 
   positionElement(element, x, y) {
