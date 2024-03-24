@@ -1,26 +1,47 @@
 import { calculateFPS } from "./js/fps.js";
 import "./js/pongTester/PongPaddleTester.js";
 
+const pong = document.getElementById("pong");
+const pongTester = document.getElementById("pongTester");
 const pongPaddleTester = document.getElementById("pongPaddleTester");
-pongPaddleTester.setup();
-
-// const pong = document.getElementById("pong");
-// const pongTester = document.getElementById("pongTester");
 
 // SET UP
-// pong.setup();
-// pong.start();
+let mode = "pongPaddleTester";
 
-// pongTester.setup();
-// pongTester.start();
+if (mode === "pong") {
+  pong.setup();
+  pong.start();
+
+  pongTester.style.display = "none";
+  pongPaddleTester.style.display = "none";
+}
+
+if (mode === "pongTester") {
+  pongTester.setup();
+
+  pong.style.display = "none";
+  pongPaddleTester.style.display = "none";
+}
+
+if (mode === "pongPaddleTester") {
+  pongPaddleTester.setup();
+
+  pong.style.display = "none";
+  pongTester.style.display = "none";
+}
 
 // KICK OFF
 loop();
 
 // LOOP
 function loop() {
-  // pong.loop();
-  // pongTester.loop();
+  if (mode === "pong") {
+    pong.loop();
+  }
+
+  if (mode === "pongTester") {
+    pongTester.loop();
+  }
 
   // Calculate and display FPS
   calculateFPS();
