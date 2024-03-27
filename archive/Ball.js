@@ -17,7 +17,7 @@ export class Ball {
     this.x += this.vx;
     this.y += this.vy;
 
-    this.restictToBounds();
+    this.restrictToBounds();
 
     this.draw();
   }
@@ -44,7 +44,7 @@ export class Ball {
     this.draw();
   }
 
-  restictToBounds() {
+  restrictToBounds() {
     if (this.x >= this.bounds.right - this.width) {
       this.x = this.bounds.right - this.width;
       this.vx = -this.vx;

@@ -6,6 +6,7 @@ export class DataBall {
     this.maxVy = params.maxVy;
     this.size = this.params.size;
     this.radius = this.size / 2;
+
     // sets this.  x, y, vx, vy, centerPt
     this.reset();
   }
@@ -13,7 +14,7 @@ export class DataBall {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.restictToBounds();
+    this.restrictToBounds();
     this.updateCenterPt();
   }
 
@@ -31,19 +32,26 @@ export class DataBall {
   }
 
   manuallySetBallPos(x, y) {
-    this.x = x - this.radius;
-    this.y = y - this.radius;
+    this.x = x;
+    this.y = y;
     this.updateCenterPt();
   }
 
   // for testing purposes
-  aimBallAtTarget(paddle, randomise) {
+  aimBallAtTarget(targ, randomise) {
     if (randomise) {
       this.vx = -(1 + Math.random() * this.maxVy);
     } else {
       this.vx = -this.maxVy;
     }
-    this.vy = 0;
+
+    // work out the angle here
+    const targY = targ.y;
+    const xDist = this.x - targ.x;
+    const yDist = this.y - targY;
+
+    // so ball y has to change by yDist over xDistance/xSpeed
+    this.vy = yDist / (xDist / this.vx);
   }
 
   reset() {
@@ -89,7 +97,7 @@ export class DataBall {
     }
   }
 
-  restictToBounds() {
+  restrictToBounds() {
     if (this.y > this.bounds.bottom - this.size) {
       this.y = this.bounds.bottom - this.size;
       this.vy = -this.vy;

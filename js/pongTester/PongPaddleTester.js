@@ -109,23 +109,43 @@ class PongPaddleTester extends HTMLElement {
   }
 
   resetBall(dataBall) {
-    const minY = this.dataPong.paddleLeft.y - dataBall.radius;
+    // const midY = minY + range / 2;
+
+    const usePos1 = false;
+
+    const ballStartX = this.dataPong.bounds.right;
+    const ballTargX =
+      this.dataPong.paddleLeft.x + this.dataPong.paddleLeft.width;
+
+    const minY = this.dataPong.paddleLeft.y - dataBall.size;
     const maxY =
       this.dataPong.paddleLeft.y +
       this.dataPong.paddleLeft.height +
-      dataBall.radius;
+      dataBall.size;
 
     const range = maxY - minY;
-    const ballOffset = range / (this.totalBalls - 1);
 
-    // const midY = minY + range / 2;
+    const ballOffsetAmount = range / this.totalBalls;
+    const ballOffset = dataBall.index * ballOffsetAmount;
+    const ballTargY = minY + ballOffset;
 
-    dataBall.manuallySetBallPos(
-      this.dataPong.bounds.right,
-      minY + dataBall.index * ballOffset
-    );
+    let ballStartY;
 
-    dataBall.aimBallAtTarget(this.dataPong.paddleLeft, false);
+    // spread over range
+    if (usePos1) {
+      ballStartY = ballTargY;
+    } else {
+      ballStartY = this.dataPong.bounds.bottom - 30 + ballOffset;
+    }
+
+    dataBall.manuallySetBallPos(ballStartX, ballStartY);
+
+    const targ = {
+      x: ballTargX,
+      y: ballTargY,
+    };
+
+    dataBall.aimBallAtTarget(targ, false);
   }
 
   loop() {
@@ -142,7 +162,13 @@ class PongPaddleTester extends HTMLElement {
         }
       }
 
+      // if goes off the right side reset ball
       if (b.x > this.dataPong.bounds.right) {
+        this.resetBall(b);
+      }
+
+      // if goes off the left side reset ball
+      if (b.x < this.dataPong.bounds.left) {
         this.resetBall(b);
       }
     }
