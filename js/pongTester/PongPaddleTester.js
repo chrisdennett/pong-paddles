@@ -33,9 +33,9 @@ class PongPaddleTester extends HTMLElement {
       useGapBug: false,
       useScoreBasedPaddleSizes: false,
       palette: {
-        surround: "#3584fb",
-        inset: "#3783fa",
-        screen: "#3584fb",
+        surround: "rgb(119 119 119)",
+        inset: "rgb(119 119 119)",
+        screen: "rgb(119 119 119)",
         paddleLeft: "white",
         paddleRight: "white",
         ball: "white",

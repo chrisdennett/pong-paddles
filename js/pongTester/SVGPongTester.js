@@ -407,7 +407,7 @@ class SvgPongTester extends HTMLElement {
     this.rightPaddle.style.display = "none";
 
     // screen colours
-    this.inlay.style.fill = dataPong.palette.inlay;
+    this.inlay.style.fill = dataPong.palette.inset;
     this.screen.style.fill = dataPong.palette.screen;
     this.surround.style.background = dataPong.palette.surround;
 

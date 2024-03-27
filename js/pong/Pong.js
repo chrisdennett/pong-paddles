@@ -15,7 +15,7 @@ class Pong extends HTMLElement {
 
     this.defaultGameSettings = {
       gameMode: "demo",
-      displayWidth: 350,
+      displayWidth: 250,
       delayAfterPoint: 1000,
       delayRestartAfterWin: 2000,
       winningScore: 11,
@@ -51,10 +51,10 @@ class Pong extends HTMLElement {
         left: 37,
       },
       ball: {
-        serveVx: 3,
+        serveVx: 6,
         serveVy: 1,
-        vx: 5,
-        maxVy: 3,
+        vx: 11,
+        maxVy: 11,
         size: 5,
       },
       paddle: {

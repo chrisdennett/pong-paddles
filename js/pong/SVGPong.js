@@ -379,7 +379,10 @@ class SvgPong extends HTMLElement {
     this.ballElem.style.fill = dataPong.palette.ball;
 
     // screen colours
-    this.inlay.style.fill = dataPong.palette.inlay;
+    this.inlay.style.fill = dataPong.palette.inset;
+
+    console.log("dataPong.palette.inset: ", dataPong.palette.inset);
+
     this.screen.style.fill = dataPong.palette.screen;
     this.surround.style.background = dataPong.palette.surround;
 

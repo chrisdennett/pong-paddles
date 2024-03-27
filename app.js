@@ -19,6 +19,7 @@ if (mode === "pong") {
 if (mode === "pongTester") {
   pongTester.setup();
 
+  pongTester.style.display = "inherit";
   pong.style.display = "none";
   pongPaddleTester.style.display = "none";
 }

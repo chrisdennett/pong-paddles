@@ -14,7 +14,7 @@ PongTesterTemplate.innerHTML = /*html*/ `
             min-height: 100vh;
             display: flex;
             flex-wrap: wrap;
-            align-content: center;
+            align-content: flex-start;
             align-items: center;
             justify-content: center;
         }
@@ -27,6 +27,11 @@ PongTesterTemplate.innerHTML = /*html*/ `
             display: inline-block;
         }
 
+        h2{
+          margin: 30px 0;
+          padding: 0
+        }
+
         #infoList h2,
         #infoList p {
             margin: 0;
@@ -34,7 +39,6 @@ PongTesterTemplate.innerHTML = /*html*/ `
 
     </style>
     <div id="surround">
-        <h1>PongTester</h1>
         <h2 id="sumScore" style="text-align: center; color: white">Score: 0:0</h2>
         <div id="gamesHolder"></div>
     </div>
@@ -50,7 +54,7 @@ class PongTester extends HTMLElement {
   }
 
   setup() {
-    this.totalPongs = 12;
+    this.totalPongs = 20;
     this.pongGames = [];
     const hueStep = 360 / this.totalPongs;
 
