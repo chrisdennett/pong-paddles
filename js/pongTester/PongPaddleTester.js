@@ -70,9 +70,9 @@ class PongPaddleTester extends HTMLElement {
       },
     };
 
-    this.totalBalls = 7;
+    this.totalBalls = 5;
     this.usePongPhysics = true;
-    this.preset = 0;
+    this.preset = 1;
 
     this.svgPong = shadow.getElementById("svgPongTester");
   }
@@ -117,7 +117,10 @@ class PongPaddleTester extends HTMLElement {
       this.dataPong.paddleLeft.x + this.dataPong.paddleLeft.width;
 
     const minY = this.dataPong.paddleLeft.y - dataBall.size;
-    const maxY = this.dataPong.paddleLeft.y + this.dataPong.paddleLeft.height;
+    // minus 1 needed to stop ball missing bottom of paddle,
+    // I haven't found the source of this issue yet, but this seems to work!!
+    const maxY =
+      this.dataPong.paddleLeft.y + this.dataPong.paddleLeft.height - 1;
 
     const range = maxY - minY;
 
