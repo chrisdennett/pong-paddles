@@ -70,8 +70,9 @@ class PongPaddleTester extends HTMLElement {
       },
     };
 
-    this.totalBalls = 5;
+    this.totalBalls = 7;
     this.usePongPhysics = true;
+    this.preset = 0;
 
     this.svgPong = shadow.getElementById("svgPongTester");
   }
@@ -111,31 +112,32 @@ class PongPaddleTester extends HTMLElement {
   resetBall(dataBall) {
     // const midY = minY + range / 2;
 
-    const usePos1 = false;
-
     const ballStartX = this.dataPong.bounds.right;
     const ballTargX =
       this.dataPong.paddleLeft.x + this.dataPong.paddleLeft.width;
 
     const minY = this.dataPong.paddleLeft.y - dataBall.size;
-    const maxY =
-      this.dataPong.paddleLeft.y +
-      this.dataPong.paddleLeft.height +
-      dataBall.size;
+    const maxY = this.dataPong.paddleLeft.y + this.dataPong.paddleLeft.height;
 
     const range = maxY - minY;
 
-    const ballOffsetAmount = range / this.totalBalls;
+    const ballOffsetAmount = range / (this.totalBalls - 1);
     const ballOffset = dataBall.index * ballOffsetAmount;
     const ballTargY = minY + ballOffset;
 
     let ballStartY;
 
     // spread over range
-    if (usePos1) {
+    if (this.preset === 0) {
       ballStartY = ballTargY;
-    } else {
+    }
+
+    if (this.preset === 1) {
       ballStartY = this.dataPong.bounds.bottom - 30 + ballOffset;
+    }
+
+    if (this.preset === 2) {
+      ballStartY = this.dataPong.bounds.top + ballOffset;
     }
 
     dataBall.manuallySetBallPos(ballStartX, ballStartY);
