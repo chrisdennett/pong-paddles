@@ -125,7 +125,7 @@ class PongPaddleTester extends HTMLElement {
       minY + dataBall.index * ballOffset
     );
 
-    dataBall.aimBallAtPaddle(this.dataPong.paddleLeft, false);
+    dataBall.aimBallAtTarget(this.dataPong.paddleLeft, false);
   }
 
   loop() {

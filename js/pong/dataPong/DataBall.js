@@ -37,7 +37,7 @@ export class DataBall {
   }
 
   // for testing purposes
-  aimBallAtPaddle(paddle, randomise) {
+  aimBallAtTarget(paddle, randomise) {
     if (randomise) {
       this.vx = -(1 + Math.random() * this.maxVy);
     } else {
