@@ -26,7 +26,7 @@ class PongPaddleTester extends HTMLElement {
 
     this.defaultGameSettings = {
       gameMode: "demo",
-      displayWidth: 800,
+      displayWidth: 1080,
       delayAfterPoint: 1000,
       delayRestartAfterWin: 2000,
       winningScore: 11,
@@ -70,7 +70,7 @@ class PongPaddleTester extends HTMLElement {
       },
     };
 
-    this.totalBalls = 5;
+    this.totalBalls = 77;
     this.usePongPhysics = true;
     this.preset = 1;
 
@@ -101,6 +101,27 @@ class PongPaddleTester extends HTMLElement {
 
     this.svgPong.setup(this.dataPong, this.testBalls);
     this.svgPong.draw();
+
+    this.titles = document.getElementById("pongTitles");
+
+    document.addEventListener("keypress", (e) => {
+      if (e.key === "c") {
+        this.usePongPhysics = !this.usePongPhysics;
+        if (this.usePongPhysics) {
+          this.titles.innerHTML = `PONG "PHYSICS"`;
+        } else {
+          this.titles.innerHTML = `BORING STANDARD "PHYSICS"`;
+        }
+      }
+
+      if (e.key === "1") {
+        this.preset++;
+
+        if (this.preset === 3) {
+          this.preset = 0;
+        }
+      }
+    });
   }
 
   resetBalls() {
@@ -150,7 +171,7 @@ class PongPaddleTester extends HTMLElement {
       y: ballTargY,
     };
 
-    dataBall.aimBallAtTarget(targ, false);
+    dataBall.aimBallAtTarget(targ, true);
   }
 
   loop() {
